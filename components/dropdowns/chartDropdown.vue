@@ -1,11 +1,8 @@
 <template>
-  <div class="dropdown">
+  <div :class="{open}" class="dropdown">
     <div @click="open = !open" class="selectbox">
       <p class="selected">{{ selected }}</p>
-      <ChevronDownIcon
-        :style="{ transform: open ? 'rotate(180deg)' : '' }"
-        size="2x"
-      />
+      <ChevronDownIcon :style="{ transform: open ? 'rotate(180deg)' : '' }" size="2x" />
     </div>
     <div v-if="open" class="drop">
       <div
@@ -13,9 +10,7 @@
         class="option"
         v-for="option in options"
         :key="option.value"
-      >
-        {{ option.text }}
-      </div>
+      >{{ option.text }}</div>
     </div>
   </div>
 </template>
@@ -37,6 +32,10 @@ export default {
           text: 'Liniendiagramm',
           value: 'line',
         },
+        {
+          text: 'Tortendiagramm',
+          value: 'donut',
+        },
       ],
     }
   },
@@ -48,31 +47,38 @@ export default {
 <style lang="scss" scoped>
 .dropdown {
   position: relative;
-  padding: 15px;
+  padding: 8px;
   border: 1px solid var(--border-color);
   cursor: pointer;
-
+  border-radius: 6px;
   .selectbox {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+
   .option {
-    padding: 15px;
-    margin: 0 -16px;
-    border-left: 1px solid var(--border-color);
-    border-right: 1px solid var(--border-color);
+    padding: 10px;
+    width: 100%;
+
     background: var(--background-light);
+
     &:hover {
       background: #ececec;
     }
   }
   .drop {
-    width: calc(100% - 30px);
+    width: calc(100% + 2px);
+    top: 100%;
+    z-index: 10;
+    left: -1px;
     position: absolute;
-    &:last-child {
-      border-bottom: 1px solid var(--border-color);
-    }
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
   }
+}
+.open {
+  border-radius: 6px 6px 0 0;
 }
 </style>

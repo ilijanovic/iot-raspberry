@@ -1,10 +1,8 @@
 <template>
   <div class="options">
     <div class="header">
-      <h2>Module auswählen</h2>
-      <closeButton
-        @click.native="$store.commit('modals/SET_MODULE_OPTIONS', false)"
-      />
+      <h2>Modul auswählen</h2>
+      <closeButton @click.native="$store.commit('modals/SET_MODULE_OPTIONS', false)" />
     </div>
     <diagrammDropdown />
     <div class="preview">
@@ -14,7 +12,7 @@
 </template>
 <script>
 import closeButton from '@/components/buttons/close'
-import diagrammDropdown from '@/components/dropdowns/chart'
+import diagrammDropdown from '@/components/dropdowns/chartDropdown'
 import linePreview from '@/components/previews/lineDiagramm'
 export default {
   data() {
@@ -31,6 +29,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .options {
+  overflow: visible;
   position: fixed;
   background: var(--background-light);
   border-radius: 10px;
@@ -42,6 +41,7 @@ export default {
   min-height: 700px;
   box-shadow: var(--shadow);
   padding: 10px;
+  border: 1px solid var(--border-color);
   .preview {
     max-height: 200px;
   }

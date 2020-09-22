@@ -45,7 +45,7 @@ html {
   --light-blue: #273c75;
   --dark-blue: #192a56;
   --border-color: #dadada;
-  --shadow: 0 0 10px -4px black;
+  --shadow: 0 0 10px -6px black;
   --text-light: white;
   --text-dark: #192a56;
   --background-light: white;
@@ -63,5 +63,33 @@ html {
 small {
   color: grey;
   font-size: 15px;
+  padding: 5px 0;
+  display: block;
+}
+
+input {
+  display: block;
+  border: none;
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  width: 100%;
+  outline: none;
+  border-radius: 6px;
+} /* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(206, 206, 206);
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(173, 173, 173);
 }
 </style>
