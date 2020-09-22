@@ -15,6 +15,9 @@
         <borderColor @setBorder="setBorder" />
       </div>
     </div>
+    <div style="padding: 15px; text-align: right">
+      <add>Speichern</add>
+    </div>
   </div>
 </template>
 
@@ -22,10 +25,12 @@
 import Chart from 'chart.js'
 import chartColor from '@/components/dropdowns/line/chartColorDropdown'
 import borderColor from '@/components/dropdowns/line/chartBorderColor'
+import add from '@/components/buttons/primary'
 export default {
   components: {
     chartColor,
     borderColor,
+    add,
   },
   data: () => ({
     chart: null,

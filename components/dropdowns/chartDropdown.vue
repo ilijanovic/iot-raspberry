@@ -1,5 +1,5 @@
 <template>
-  <div :class="{open}" class="dropdown">
+  <div tabindex="0" @blur="open =false" :class="{open}" class="dropdown">
     <div @click="open = !open" class="selectbox">
       <p class="selected">{{ selected }}</p>
       <ChevronDownIcon :style="{ transform: open ? 'rotate(180deg)' : '' }" size="2x" />
@@ -48,6 +48,7 @@ export default {
 .dropdown {
   position: relative;
   padding: 8px;
+  outline: none;
   border: 1px solid var(--border-color);
   cursor: pointer;
   border-radius: 6px;
