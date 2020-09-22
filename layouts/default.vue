@@ -92,4 +92,12 @@ input {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(173, 173, 173);
 }
+
+.disabled {
+  color: grey !important;
+  background: lightgrey !important;
+  pointer-events: none !important;
+  border-color: lightgrey !important;
+  box-shadow: none !important;
+}
 </style>

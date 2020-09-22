@@ -2,7 +2,9 @@
   <div class="options">
     <div class="header">
       <h2>Modul auswählen</h2>
-      <closeButton @click.native="$store.commit('modals/SET_MODULE_OPTIONS', false)" />
+      <closeButton
+        @click.native="$store.commit('modals/SET_MODULE_OPTIONS', false)"
+      />
     </div>
     <diagrammDropdown />
     <div class="preview">
@@ -29,7 +31,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .options {
-  overflow: visible;
+  overflow: scroll;
   position: fixed;
   background: var(--background-light);
   border-radius: 10px;

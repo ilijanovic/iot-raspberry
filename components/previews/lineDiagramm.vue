@@ -7,6 +7,10 @@
           <small>Beschreibung</small>
           <input v-model="dataset" @keyup="changeDataset" />
         </div>
+        <div class="inputbox">
+          <small>Modul Name</small>
+          <input v-model="name" />
+        </div>
       </div>
       <div class="inputsection">
         <small>Hintergrundfarbe</small>
@@ -15,8 +19,22 @@
         <borderColor @setBorder="setBorder" />
       </div>
     </div>
-    <div style="padding: 15px; text-align: right">
-      <add>Speichern</add>
+
+    <div
+      style="
+        display: flex;
+        justify-content: space-evenly;
+        padding: 15px;
+        text-align: right;
+      "
+    >
+      <spinner v-if="saving" />
+      <add
+        :class="{ disabled: saving }"
+        @click.native="save"
+        style="margin-left: auto"
+        >Speichern</add
+      >
     </div>
   </div>
 </template>
@@ -26,17 +44,36 @@ import Chart from 'chart.js'
 import chartColor from '@/components/dropdowns/line/chartColorDropdown'
 import borderColor from '@/components/dropdowns/line/chartBorderColor'
 import add from '@/components/buttons/primary'
+import spinner from '@/components/spinner/popup'
+
 export default {
   components: {
     chartColor,
     borderColor,
     add,
+    spinner,
   },
   data: () => ({
     chart: null,
+    name: '',
     dataset: 'My First dataset ',
+    saving: false,
+    borderColor: '#bdc3c7',
+    backgroundColor: '#34495e',
+    componentName: 'lineModule',
   }),
   methods: {
+    save() {
+      this.saving = true
+      this.$store.commit('ADD_MODULE', {
+        name: this.name,
+        dataset: this.dataset,
+        borderColor: this.borderColor,
+        backgroundColor: this.backgroundColor,
+        componentName: this.componentName,
+      })
+      this.$store.commit('modals/SET_MODULE_OPTIONS', false)
+    },
     changeDataset() {
       this.chart.data.datasets[0].label = this.dataset
       this.updateChart()
