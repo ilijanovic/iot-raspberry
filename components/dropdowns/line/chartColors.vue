@@ -10,7 +10,10 @@
         class="option"
         v-for="option in options"
         :key="option.value"
-      >{{ option.text }}</div>
+      >
+        <p>{{ option.text }}</p>
+        <div style="width: 30px; height: 30px" :style="{background: option.value}"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -21,7 +24,7 @@ export default {
     selectDiagramm({ value, text }) {
       this.selected = text
       this.open = false
-      this.$emit('setBackground', value)
+      this.$emit('setColor', value)
     },
   },
   data() {
@@ -77,9 +80,9 @@ export default {
   .option {
     padding: 10px;
     width: 100%;
-
+    display: flex;
     background: var(--background-light);
-
+    justify-content: space-between;
     &:hover {
       background: #ececec;
     }

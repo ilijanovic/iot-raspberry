@@ -14,9 +14,9 @@
       </div>
       <div class="inputsection">
         <small>Hintergrundfarbe</small>
-        <chartColor @setBackground="setBackground" />
+        <chartColor @setColor="setBackground" />
         <small>Randfarbe</small>
-        <borderColor @setBorder="setBorder" />
+        <chartColor @setColor="setBorder" />
       </div>
     </div>
 
@@ -29,27 +29,20 @@
       "
     >
       <spinner v-if="saving" />
-      <add
-        :class="{ disabled: saving }"
-        @click.native="save"
-        style="margin-left: auto"
-        >Speichern</add
-      >
+      <add :class="{ disabled: saving }" @click.native="save" style="margin-left: auto">Speichern</add>
     </div>
   </div>
 </template>
 
 <script>
 import Chart from 'chart.js'
-import chartColor from '@/components/dropdowns/line/chartColorDropdown'
-import borderColor from '@/components/dropdowns/line/chartBorderColor'
+import chartColor from '@/components/dropdowns/line/chartColors'
 import add from '@/components/buttons/primary'
 import spinner from '@/components/spinner/popup'
 
 export default {
   components: {
     chartColor,
-    borderColor,
     add,
     spinner,
   },
@@ -114,7 +107,6 @@ export default {
             },
           ],
         },
-        options: {},
       })
     })
   },

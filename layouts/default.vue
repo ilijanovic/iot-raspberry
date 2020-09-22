@@ -1,25 +1,9 @@
 <template>
   <div>
-    <transition name="popup">
-      <selectModule v-if="state" />
-    </transition>
     <Nuxt />
   </div>
 </template>
-<script>
-import selectModule from '@/components/options/selectModule'
-import { mapGetters } from 'vuex'
-export default {
-  computed: {
-    ...mapGetters({
-      state: 'modals/moduleState',
-    }),
-  },
-  components: {
-    selectModule,
-  },
-}
-</script>
+
 
 <style>
 html {
@@ -51,15 +35,6 @@ html {
   --background-light: white;
 }
 
-.popup-enter-active,
-.popup-leave-active {
-  transition: 300ms;
-}
-.popup-enter, .popup-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-  transform: scale(0.8) translate(-50%, -50%) !important;
-}
-
 small {
   color: grey;
   font-size: 15px;
@@ -75,29 +50,5 @@ input {
   width: 100%;
   outline: none;
   border-radius: 6px;
-} /* width */
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-/* Track */
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: rgb(206, 206, 206);
-  border-radius: 4px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: rgb(173, 173, 173);
-}
-
-.disabled {
-  color: grey !important;
-  background: lightgrey !important;
-  pointer-events: none !important;
-  border-color: lightgrey !important;
-  box-shadow: none !important;
 }
 </style>

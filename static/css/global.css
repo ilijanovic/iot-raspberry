@@ -1,0 +1,32 @@
+.layout-enter-active,
+.layout-leave-active {
+  transition: opacity 0.3s;
+}
+.layout-enter,
+.layout-leave-active {
+  opacity: 0;
+}
+.swap-enter-active,
+.swap-leave-active {
+  transition: all 500ms;
+}
+.swap-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateX(30px);
+}
+.swap-enter {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+.popup-list-move {
+  transition: transform 200ms;
+}
+
+.popup-list-enter-active,
+.popup-list-leave-active {
+  transition: all 500ms;
+}
+.popup-list-enter, .popup-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: scale(0.7);
+}
