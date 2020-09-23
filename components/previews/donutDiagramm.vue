@@ -10,17 +10,26 @@
         >
         <small>{{ dataSets.length }} / {{ maxSets }}</small>
       </div>
-      <transition-group name="popup-list">
-        <div v-for="set in dataSets" :key="set.id" class="inputsection">
-          <div class="inputbox">
-            <small>Beschreibung</small>
-            <input v-model="dataset" @keyup="changeDataset" />
-          </div>
-          <div class="inputbox">
-            <small>Hintergrundfarbe</small>
-            <chartColor />
-          </div></div
-      ></transition-group>
+      <div style="width: 100%">
+        <transition-group name="popup-list" tag="div">
+          <div v-for="(set, i) in dataSets" :key="set.id" class="inputsection">
+            <div class="inputbox">
+              <small>Beschreibung</small>
+              <input @keyup="setDesc($event, i)" :value="set.description" />
+            </div>
+            <div class="inputbox">
+              <small>Hintergrundfarbe</small>
+              <chartColor @setColor="setColor($event, i)" />
+            </div>
+            <div style="flex: none">
+              <br /><Trash2Icon
+                style="color: #c0392b; cursor: pointer"
+                size="1.8x"
+                @click="remove(i)"
+              />
+            </div></div
+        ></transition-group>
+      </div>
     </div>
 
     <div
@@ -48,12 +57,13 @@ import Chart from 'chart.js'
 import chartColor from '@/components/dropdowns/line/chartColors'
 import primary from '@/components/buttons/primary'
 import spinner from '@/components/spinner/popup'
-
+import { Trash2Icon } from 'vue-feather-icons'
 export default {
   components: {
     chartColor,
     primary,
     spinner,
+    Trash2Icon,
   },
   data: () => ({
     chart: null,
@@ -65,12 +75,39 @@ export default {
     backgroundColor: '#34495e',
     componentName: 'lineModule',
   }),
+  mounted() {
+    this.$nextTick(() => {
+      this.addSet()
+    })
+  },
   methods: {
+    setDesc(e, i) {
+      let val = e.target.value
+      this.chart.data.labels[i] = val
+      this.updateChart()
+    },
+    setColor(color, index) {
+      this.setBackground(color, index)
+    },
+    remove(i) {
+      this.dataSets.splice(i, 1)
+      this.chart.data.datasets[0].data.splice(i, 1)
+      this.chart.data.datasets[0].backgroundColor.splice(i, 1)
+      this.chart.data.labels.splice(i, 1)
+      this.updateChart()
+    },
     addSet() {
       if (this.dataSets.length >= this.maxSets) return
+
       this.dataSets.push({
         id: Math.random(),
+        color: this.backgroundColor,
+        description: 'data...',
       })
+      this.chart.data.datasets[0].data.push(1)
+      this.chart.data.datasets[0].backgroundColor.push(this.backgroundColor)
+      this.chart.data.labels.push('data...')
+      this.updateChart()
     },
     save() {
       this.saving = true
@@ -83,23 +120,16 @@ export default {
       })
       this.$store.commit('modals/SET_MODULE_OPTIONS', false)
     },
-    changeDataset() {
-      this.chart.data.datasets[0].label = this.dataset
-      this.updateChart()
-    },
     updateChart() {
       this.chart.update()
     },
-    setBorder(color) {
-      this.chart.data.datasets[0].borderColor = color
-      this.updateChart()
-    },
-    setBackground(color) {
-      this.chart.data.datasets[0].backgroundColor = color
+
+    setBackground(color, i) {
+      this.chart.data.datasets[0].backgroundColor[i] = color
       this.updateChart()
     },
   },
-  mounted() {
+  created() {
     this.$nextTick(() => {
       let ctx = this.$refs.canvas.getContext('2d')
       this.chart = new Chart(ctx, {
@@ -107,12 +137,12 @@ export default {
         data: {
           datasets: [
             {
-              data: [10, 20, 30],
-              backgroundColor: ['#34495e', '#2980b9', '#c0392b'],
+              data: [],
+              backgroundColor: [],
             },
           ],
 
-          labels: ['Red', 'Yellow', 'Blue'],
+          labels: [],
         },
       })
     })
@@ -132,6 +162,7 @@ export default {
     flex-flow: wrap;
     width: 100%;
     justify-content: space-evenly;
+    align-items: center;
     div {
       flex: 1;
       margin: 0 5px;
