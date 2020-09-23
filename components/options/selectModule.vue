@@ -6,9 +6,11 @@
         @click.native="$store.commit('modals/SET_MODULE_OPTIONS', false)"
       />
     </div>
-    <diagrammDropdown />
+    <diagrammDropdown @setDiagramm="setDiagramm" />
     <div class="preview">
-      <component :is="selectedPreview"></component>
+      <transition name="fade" mode="out-in">
+        <component :key="selectedPreview" :is="selectedPreview"></component>
+      </transition>
     </div>
   </div>
 </template>
@@ -16,16 +18,23 @@
 import closeButton from '@/components/buttons/close'
 import diagrammDropdown from '@/components/dropdowns/chartDropdown'
 import linePreview from '@/components/previews/lineDiagramm'
+import donutPreview from '@/components/previews/donutDiagramm'
 export default {
   data() {
     return {
       selectedPreview: 'linePreview',
     }
   },
+  methods: {
+    setDiagramm(diagramm) {
+      this.selectedPreview = diagramm
+    },
+  },
   components: {
     closeButton,
     diagrammDropdown,
     linePreview,
+    donutPreview,
   },
 }
 </script>

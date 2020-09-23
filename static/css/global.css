@@ -30,3 +30,10 @@
   opacity: 0;
   transform: scale(0.7);
 }
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 250ms;
+}
+.fade-enter, .fade-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}

@@ -1,8 +1,11 @@
 <template>
-  <div tabindex="0" @blur="open =false" :class="{open}" class="dropdown">
+  <div tabindex="0" @blur="open = false" :class="{ open }" class="dropdown">
     <div @click="open = !open" class="selectbox">
       <p class="selected">{{ selected }}</p>
-      <ChevronDownIcon :style="{ transform: open ? 'rotate(180deg)' : '' }" size="2x" />
+      <ChevronDownIcon
+        :style="{ transform: open ? 'rotate(180deg)' : '' }"
+        size="2x"
+      />
     </div>
     <div v-if="open" class="drop">
       <div
@@ -10,7 +13,9 @@
         class="option"
         v-for="option in options"
         :key="option.value"
-      >{{ option.text }}</div>
+      >
+        {{ option.text }}
+      </div>
     </div>
   </div>
 </template>
@@ -21,6 +26,7 @@ export default {
     selectDiagramm({ value, text }) {
       this.selected = text
       this.open = false
+      this.$emit('setDiagramm', value)
     },
   },
   data() {
@@ -30,11 +36,11 @@ export default {
       options: [
         {
           text: 'Liniendiagramm',
-          value: 'line',
+          value: 'linePreview',
         },
         {
           text: 'Tortendiagramm',
-          value: 'donut',
+          value: 'donutPreview',
         },
       ],
     }
