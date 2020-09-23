@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition name="swap" mode="out-in">
-      <component :key="comp._id" @setcomponent="setcomponent" :is="comp" />
+      <component :key="comp" @setcomponent="setcomponent" :is="comp" />
     </transition>
   </div>
 </template>
