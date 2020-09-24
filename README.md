@@ -17,4 +17,13 @@ $ npm run start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## MongoDB configuration
+
+For the database you will need to create an `.env` file in the root directory:
+
+
+USER=...        // your mongodb username
+PASSWORD=...    // your mongodb password
+SERVER=...      // your mongodb server URL
+DB=...          // your mongodb database name
+
