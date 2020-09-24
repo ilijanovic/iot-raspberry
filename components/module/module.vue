@@ -5,51 +5,112 @@
       <div class="status"></div>
     </div>
     <div class="content">
+      <div class="chart">
+        <component :is="module.type" />
+        <div style="flex: 1" :class="{ canvas: open }">
+          <canvas style="margin-left: auto" ref="canvas"></canvas>
+        </div>
+      </div>
       <div class="buttonbox">
         <trash @click.native="deleteModule(module.id)" />
         <primary style="margin-left: auto; margin-right: 10px" class="btn"
           >Bearbeiten<Edit3Icon style="margin-left: 10px" size="1.3x"
         /></primary>
-        <primary class="btn"
-          >Ansehen<EyeIcon style="margin-left: 10px" size="1.3x"
+        <primary @click.native="toggleChart" class="btn"
+          >Ansehen<ChevronsDownIcon
+            style="margin-left: 10px"
+            :style="{ transform: !open ? 'rotate(180deg)' : '' }"
+            size="1.3x"
         /></primary>
       </div>
     </div>
   </div>
 </template>
 <script>
+import Chart from 'chart.js'
 import primary from '@/components/buttons/primary'
-import { EyeIcon, Edit3Icon } from 'vue-feather-icons'
+import { ChevronsDownIcon, Edit3Icon } from 'vue-feather-icons'
 import trash from '@/components/buttons/trash'
+import lineChart from '@/components/module/infobox/line'
+import donutChart from '@/components/module/infobox/donut'
+import { minimizeOptions, defaultOptions } from '@/static/js/chartoptions'
 export default {
   props: ['module'],
   components: {
     primary,
-    EyeIcon,
+    lineChart,
+    donutChart,
+    ChevronsDownIcon,
     Edit3Icon,
     trash,
   },
+  data: () => ({
+    open: true,
+    average: 12.2,
+  }),
   methods: {
+    toggleChart() {
+      this.open = !this.open
+      requestAnimationFrame(() => {
+        this.chart.resize()
+        requestAnimationFrame(() => {
+          this.chart.resize()
+        })
+      })
+
+      if (!this.open) {
+        this.chart.options = defaultOptions
+      } else {
+        this.chart.options = minimizeOptions
+      }
+    },
     deleteModule(id) {
       this.$store.commit('modals/SET_WARNING', {
-        message: 'Wollen Sie wirklich dieses Modul löschen?',
+        message:
+          'Wollen Sie wirklich dieses Modul löschen? \n  Die gespeicherten Daten werden unwiederruflich gelöscht',
         id,
       })
     },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      let ctx = this.$refs.canvas.getContext('2d')
+      this.chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+          ],
+          datasets: [
+            {
+              label: 'My First dataset',
+              backgroundColor: '#34495e',
+              borderColor: '#bdc3c7',
+              data: [0, 10, 5, 2, 20, 30, 45],
+            },
+          ],
+        },
+        options: minimizeOptions,
+      })
+    })
   },
 }
 </script>
 <style lang="scss" scoped>
 .module {
   width: 100%;
-  height: 200px;
+  min-height: 200px;
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow);
   border-radius: 6px;
   margin-bottom: 20px;
-  canvas {
-    height: 100%;
-  }
+
   .head {
     background: var(--light-blue);
     border-radius: 6px 6px 0 0;
@@ -72,6 +133,7 @@ export default {
     .buttonbox {
       display: flex;
       justify-content: space-between;
+      margin: 10px 0;
     }
     .btn {
       display: flex;
@@ -79,5 +141,13 @@ export default {
       justify-content: space-between;
     }
   }
+}
+.chart {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: wrap;
+}
+.canvas {
+  max-width: 300px;
 }
 </style>

@@ -77,7 +77,8 @@ small {
   display: block;
 }
 
-input {
+input,
+textarea {
   display: block;
   border: none;
   border: 1px solid var(--border-color);

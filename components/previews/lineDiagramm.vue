@@ -67,7 +67,7 @@ export default {
         dataset: this.dataset,
         borderColor: this.borderColor,
         backgroundColor: this.backgroundColor,
-        type: 'line',
+        type: 'lineChart',
       })
       this.$store.commit('modals/SET_MODULE_OPTIONS', false)
     },

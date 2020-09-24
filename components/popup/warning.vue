@@ -73,6 +73,9 @@ export default {
     margin: auto;
     padding: 15px;
     text-align: center;
+    p {
+      white-space: pre-line;
+    }
   }
 }
 </style>

@@ -117,7 +117,7 @@ export default {
         dataset: this.dataset,
         borderColor: this.borderColor,
         backgroundColor: this.backgroundColor,
-        componentName: this.componentName,
+        type: 'donutChart',
       })
       this.$store.commit('modals/SET_MODULE_OPTIONS', false)
     },
