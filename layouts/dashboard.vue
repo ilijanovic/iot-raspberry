@@ -1,6 +1,7 @@
 
 <template>
   <div>
+    <warning v-if="warning" />
     <transition name="popup">
       <selectModule v-if="state" />
     </transition>
@@ -9,15 +10,18 @@
 </template>
 <script>
 import selectModule from '@/components/options/selectModule'
+import warning from '@/components/popup/warning'
 import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
       state: 'modals/moduleState',
+      warning: 'modals/warning',
     }),
   },
   components: {
     selectModule,
+    warning,
   },
 }
 </script>

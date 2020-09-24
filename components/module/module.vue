@@ -6,11 +6,12 @@
     </div>
     <div class="content">
       <div class="buttonbox">
-        <primary class="btn"
-          >Ansehen<EyeIcon style="margin-left: 10px" size="1.3x"
+        <trash />
+        <primary style="margin-left: auto; margin-right: 10px" class="btn"
+          >Bearbeiten<Edit3Icon style="margin-left: 10px" size="1.3x"
         /></primary>
         <primary class="btn"
-          >Bearbeiten<Edit3Icon style="margin-left: 10px" size="1.3x"
+          >Ansehen<EyeIcon style="margin-left: 10px" size="1.3x"
         /></primary>
       </div>
     </div>
@@ -19,12 +20,14 @@
 <script>
 import primary from '@/components/buttons/primary'
 import { EyeIcon, Edit3Icon } from 'vue-feather-icons'
+import trash from '@/components/buttons/trash'
 export default {
   props: ['module'],
   components: {
     primary,
     EyeIcon,
     Edit3Icon,
+    trash,
   },
 }
 </script>

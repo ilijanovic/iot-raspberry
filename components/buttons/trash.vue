@@ -1,5 +1,7 @@
 <template>
-  <Trash2Icon style="color: #c0392b; cursor: pointer" size="1.8x" />
+  <div>
+    <Trash2Icon style="color: #c0392b; cursor: pointer" size="1.8x" />
+  </div>
 </template>
 
 <script>
@@ -10,3 +12,12 @@ export default {
   },
 }
 </script>
+
+<style scoped lang="scss">
+div {
+  &:active {
+    transform: scale(0.98);
+    box-shadow: none;
+  }
+}
+</style>
