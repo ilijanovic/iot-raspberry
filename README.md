@@ -21,9 +21,7 @@ $ npm run generate
 
 For the database you will need to create an `.env` file in the root directory:
 
-
-    USER=...        // your mongodb username
-    PASSWORD=...    // your mongodb password
-    SERVER=...      // your mongodb server URL
-    DB=...          // your mongodb database name
-
+    USER=         // your mongodb username
+    PASSWORD=     // your mongodb password
+    SERVER=       // your mongodb server URL
+    DB=           // your mongodb database name
