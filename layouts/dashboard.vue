@@ -1,7 +1,9 @@
 
 <template>
   <div>
-    <warning v-if="warning" />
+    <transition name="fade">
+      <warning :id="id" :message="warningMessage" v-if="warning"
+    /></transition>
     <transition name="popup">
       <selectModule v-if="state" />
     </transition>
@@ -17,6 +19,8 @@ export default {
     ...mapGetters({
       state: 'modals/moduleState',
       warning: 'modals/warning',
+      id: 'modals/moduleID',
+      warningMessage: 'modals/warningMessage',
     }),
   },
   components: {
@@ -54,6 +58,7 @@ html {
   --text-light: white;
   --text-dark: #192a56;
   --background-light: white;
+  --red: rgb(192, 57, 43);
 }
 
 .popup-enter-active,

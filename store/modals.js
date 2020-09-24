@@ -1,7 +1,8 @@
 export const state = () => ({
   moduleOptions: false,
-  warning: true,
+  warning: false,
   warningMessage: 'warning!',
+  id: null,
 })
 
 export const mutations = {
@@ -24,12 +25,14 @@ export const mutations = {
    *
    * @param {Object} state - State of the current store
    * @param {Boolean} status - Set "true" to activate warning
+   * @param {Object} id - MongoDB Object ID of the module that needs to be deleted
    * @param {String} message - Warning message that will be displayed
    */
 
-  SET_WARNING(state, message) {
+  SET_WARNING(state, { message, id }) {
     state.warning = true
     state.warningMessage = message
+    state.id = id
   },
 
   /**
@@ -49,4 +52,6 @@ export const mutations = {
 export const getters = {
   moduleState: (state) => state.moduleOptions,
   warning: (state) => state.warning,
+  moduleID: (state) => state.id,
+  warningMessage: (state) => state.warningMessage,
 }

@@ -33,6 +33,7 @@ html {
   --text-light: white;
   --text-dark: #192a56;
   --background-light: white;
+  --red: rgb(192, 57, 43);
 }
 
 small {

@@ -37,3 +37,11 @@
 .fade-enter, .fade-leave-to /* .list-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
+.popup-bounce-enter-active,
+.popup-bounce-leave-active {
+  transition: all 350ms cubic-bezier(0.31, 1.5, 0.44, 0.99);
+}
+.popup-bounce-enter, .popup-bounce-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: scale(0.5);
+}

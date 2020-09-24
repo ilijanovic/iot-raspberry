@@ -6,7 +6,7 @@
     </div>
     <div class="content">
       <div class="buttonbox">
-        <trash />
+        <trash @click.native="deleteModule(module.id)" />
         <primary style="margin-left: auto; margin-right: 10px" class="btn"
           >Bearbeiten<Edit3Icon style="margin-left: 10px" size="1.3x"
         /></primary>
@@ -28,6 +28,14 @@ export default {
     EyeIcon,
     Edit3Icon,
     trash,
+  },
+  methods: {
+    deleteModule(id) {
+      this.$store.commit('modals/SET_WARNING', {
+        message: 'Wollen Sie wirklich dieses Modul löschen?',
+        id,
+      })
+    },
   },
 }
 </script>
