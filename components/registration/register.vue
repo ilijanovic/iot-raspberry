@@ -16,8 +16,10 @@
       <input type="password" v-model="passwordAgain" />
     </div>
     <div class="inputbox" style="justify-content: space-between; display: flex">
-      <textButton @click.native="$emit('setcomponent', 'login')">schon registriert?</textButton>
-      <primary>Registrieren</primary>
+      <textButton @click.native="$emit('setcomponent', 'login')"
+        >schon registriert?</textButton
+      >
+      <primary @click.native="register">Registrieren</primary>
     </div>
   </div>
 </template>
@@ -34,6 +36,15 @@ export default {
   components: {
     primary,
     textButton,
+  },
+  methods: {
+    register() {
+      this.$axios.$post('/api/register', {
+        name: 'ifaruki',
+        password: 12345678,
+        passwordAgain: 12345678,
+      })
+    },
   },
 }
 </script>

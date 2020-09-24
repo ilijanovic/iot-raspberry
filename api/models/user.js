@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-
+import { conn } from '../config/connection'
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -17,4 +17,4 @@ const userSchema = new mongoose.Schema({
   },
 })
 
-export default mongoose.model('User', userSchema)
+export default conn.model('User', userSchema)
