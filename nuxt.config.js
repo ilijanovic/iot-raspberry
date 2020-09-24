@@ -32,12 +32,7 @@ export default {
       },
     ],
   },
-  env: {
-    USER: 'ifaruki',
-    PASSWORD: 'iotrasp122',
-    SERVER: 'cluster0.va95b.mongodb.net',
-    COLLECTION: 'iot',
-  },
+
   /*
    ** Global CSS
    */
