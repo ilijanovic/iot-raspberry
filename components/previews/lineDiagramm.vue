@@ -29,7 +29,12 @@
       "
     >
       <spinner v-if="saving" />
-      <add :class="{ disabled: saving }" @click.native="save" style="margin-left: auto">Speichern</add>
+      <add
+        :class="{ disabled: saving }"
+        @click.native="save"
+        style="margin-left: auto"
+        >Speichern</add
+      >
     </div>
   </div>
 </template>
@@ -53,7 +58,6 @@ export default {
     saving: false,
     borderColor: '#bdc3c7',
     backgroundColor: '#34495e',
-    componentName: 'lineModule',
   }),
   methods: {
     save() {
@@ -63,7 +67,7 @@ export default {
         dataset: this.dataset,
         borderColor: this.borderColor,
         backgroundColor: this.backgroundColor,
-        componentName: this.componentName,
+        type: 'line',
       })
       this.$store.commit('modals/SET_MODULE_OPTIONS', false)
     },

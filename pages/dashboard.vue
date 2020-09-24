@@ -1,9 +1,11 @@
 <template>
   <div class="container">
-    <addModule @click.native="$store.commit('modals/SET_MODULE_OPTIONS', true)" />
+    <addModule
+      @click.native="$store.commit('modals/SET_MODULE_OPTIONS', true)"
+    />
     <div class="modules">
       <transition-group name="popup-list">
-        <module v-for="(mod, i) in modules" :name="mod.name" :key="i" />
+        <module v-for="(mod, i) in modules" :module="mod" :key="i" />
       </transition-group>
     </div>
   </div>

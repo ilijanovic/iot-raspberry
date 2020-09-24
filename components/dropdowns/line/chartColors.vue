@@ -1,8 +1,11 @@
 <template>
-  <div tabindex="0" @blur="open = false" :class="{open}" class="dropdown">
+  <div tabindex="0" @blur="open = false" :class="{ open }" class="dropdown">
     <div @click="open = !open" class="selectbox">
       <p class="selected">{{ selected }}</p>
-      <ChevronDownIcon :style="{ transform: open ? 'rotate(180deg)' : '' }" size="2x" />
+      <ChevronDownIcon
+        :style="{ transform: open ? 'rotate(180deg)' : '' }"
+        size="2x"
+      />
     </div>
     <div v-if="open" class="drop">
       <div
@@ -12,7 +15,10 @@
         :key="option.value"
       >
         <p>{{ option.text }}</p>
-        <div style="width: 30px; height: 30px" :style="{background: option.value}"></div>
+        <div
+          style="width: 30px; height: 30px"
+          :style="{ background: option.value }"
+        ></div>
       </div>
     </div>
   </div>
@@ -31,6 +37,7 @@ export default {
     return {
       open: false,
       selected: 'Wet Asphalt',
+      selectedVal: '#34495e',
       options: [
         {
           text: 'Wet Asphalt',
@@ -55,6 +62,10 @@ export default {
         {
           text: 'Wisteria',
           value: '#8e44ad',
+        },
+        {
+          text: 'Alameda Ochre',
+          value: '#cc8e35',
         },
       ],
     }

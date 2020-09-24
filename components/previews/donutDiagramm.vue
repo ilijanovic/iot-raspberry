@@ -22,10 +22,11 @@
               <chartColor @setColor="setColor($event, i)" />
             </div>
             <div style="flex: none">
-              <br /><Trash2Icon
+              <br />
+              <trash
                 style="color: #c0392b; cursor: pointer"
                 size="1.8x"
-                @click="remove(i)"
+                @click.native="remove(i)"
               />
             </div></div
         ></transition-group>
@@ -57,13 +58,13 @@ import Chart from 'chart.js'
 import chartColor from '@/components/dropdowns/line/chartColors'
 import primary from '@/components/buttons/primary'
 import spinner from '@/components/spinner/popup'
-import { Trash2Icon } from 'vue-feather-icons'
+import trash from '@/components/buttons/trash'
 export default {
   components: {
     chartColor,
     primary,
     spinner,
-    Trash2Icon,
+    trash,
   },
   data: () => ({
     chart: null,

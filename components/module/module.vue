@@ -1,13 +1,43 @@
 <template>
   <div class="module">
     <div class="head">
-      <h3>{{name}}</h3>
+      <h3>{{ module.name }}</h3>
     </div>
+    <canvas ref="canvas"></canvas>
   </div>
 </template>
 <script>
+import Chart from 'chart.js'
 export default {
-  props: ['name'],
+  props: ['module'],
+  chart: null,
+  created() {
+    this.$nextTick(() => {
+      let ctx = this.$refs.canvas.getContext('2d')
+      this.chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+          ],
+          datasets: [
+            {
+              label: 'My First dataset',
+              backgroundColor: '#34495e',
+              borderColor: '#bdc3c7',
+              data: [0, 10, 5, 2, 20, 30, 45],
+            },
+          ],
+        },
+      })
+    })
+  },
 }
 </script>
 <style lang="scss" scoped>
