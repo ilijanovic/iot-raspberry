@@ -5,15 +5,23 @@
     </div>
     <div class="inputbox">
       <small>Name</small>
-      <input v-model="name" />
+      <input @keypress.enter="login" v-model="name" />
     </div>
     <div class="inputbox">
       <small>Passwort</small>
-      <input type="password" v-model="password" />
+      <input @keypress.enter="login" type="password" v-model="password" />
     </div>
     <div class="inputbox" style="justify-content: space-between; display: flex">
-      <textButton @click.native="$emit('setcomponent', 'register')">Registrieren</textButton>
+      <textButton @click.native="$emit('setcomponent', 'register')"
+        >Registrieren</textButton
+      >
       <primary @click.native="login">Login</primary>
+    </div>
+    <div class="inputbox">
+      <transition name="popup-bounce">
+        <p class="err" v-if="errorMessage">{{ errorMessage }}</p>
+        <p class="success" v-if="success">Erfolgreich eingeloggt!</p>
+      </transition>
     </div>
   </div>
 </template>
@@ -25,10 +33,24 @@ export default {
   data: () => ({
     name: '',
     password: '',
+    errorMessage: null,
+    success: false,
   }),
   methods: {
-    login() {
-      this.$router.push('/dashboard')
+    async login() {
+      this.errorMessage = null
+      try {
+        await this.$axios.$post('/api/login', {
+          name: this.name,
+          password: this.password,
+        })
+        this.success = true
+        setTimeout(() => {
+          this.$router.push('/dashboard')
+        }, 1500)
+      } catch ({ response: { data } }) {
+        this.errorMessage = data.message
+      }
     },
   },
   components: {
@@ -54,5 +76,19 @@ export default {
   }
   box-shadow: var(--shadow);
   padding-bottom: 10px;
+  .err {
+    color: white;
+    background: var(--red);
+    padding: 8px;
+    border-radius: 6px;
+    margin: 10px 0;
+  }
+  .success {
+    color: white;
+    background: var(--green);
+    padding: 8px;
+    border-radius: 6px;
+    margin: 10px 0;
+  }
 }
 </style>

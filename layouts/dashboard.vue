@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <transition name="fade">
@@ -59,6 +58,7 @@ html {
   --text-dark: #192a56;
   --background-light: white;
   --red: rgb(192, 57, 43);
+  --green: #27ae60;
 }
 
 .popup-enter-active,

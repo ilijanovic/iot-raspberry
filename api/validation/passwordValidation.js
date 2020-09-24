@@ -14,9 +14,7 @@ let { saltRounds } = config
 export function passwordValidation(password, passwordAgain) {
   return new Promise((resolve, rej) => {
     if (typeof password !== 'string' && typeof password !== 'number')
-      rej(
-        "Datentyp stimmt nicht überein. Erwartet wird der typ 'string' oder 'number'"
-      )
+      rej('Datentyp stimmt nicht überein.')
 
     password = password.toString().trim()
     passwordAgain = passwordAgain.toString().trim()

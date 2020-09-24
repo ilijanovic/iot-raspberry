@@ -5,21 +5,31 @@
     </div>
     <div class="inputbox">
       <small>Name</small>
-      <input v-model="name" />
+      <input @keypress.enter="register" v-model="name" />
     </div>
     <div class="inputbox">
       <small>Passwort</small>
-      <input type="password" v-model="password" />
+      <input @keypress.enter="register" type="password" v-model="password" />
     </div>
     <div class="inputbox">
       <small>Passwort wiederholen</small>
-      <input type="password" v-model="passwordAgain" />
+      <input
+        @keypress.enter="register"
+        type="password"
+        v-model="passwordAgain"
+      />
     </div>
     <div class="inputbox" style="justify-content: space-between; display: flex">
       <textButton @click.native="$emit('setcomponent', 'login')"
         >schon registriert?</textButton
       >
       <primary @click.native="register">Registrieren</primary>
+    </div>
+    <div class="inputbox">
+      <transition name="popup-bounce">
+        <p class="err" v-if="errorMessage">{{ errorMessage }}</p>
+        <p class="success" v-if="success">Erfolgreich registriert!</p>
+      </transition>
     </div>
   </div>
 </template>
@@ -32,18 +42,29 @@ export default {
     name: '',
     password: '',
     passwordAgain: '',
+    errorMessage: null,
+    success: false,
   }),
   components: {
     primary,
     textButton,
   },
   methods: {
-    register() {
-      this.$axios.$post('/api/register', {
-        name: 'ifaruki',
-        password: 12345678,
-        passwordAgain: 12345678,
-      })
+    async register() {
+      this.errorMessage = null
+      try {
+        await this.$axios.$post('/api/register', {
+          name: this.name,
+          password: this.password,
+          passwordAgain: this.passwordAgain,
+        })
+        setTimeout(() => {
+          this.$router.push('/dashboard')
+        }, 2500)
+        this.success = true
+      } catch ({ response: { data } }) {
+        this.errorMessage = data.message
+      }
     },
   },
 }
@@ -65,5 +86,19 @@ export default {
   }
   box-shadow: var(--shadow);
   padding-bottom: 10px;
+  .err {
+    color: white;
+    background: var(--red);
+    padding: 8px;
+    border-radius: 6px;
+    margin: 10px 0;
+  }
+  .success {
+    color: white;
+    background: var(--green);
+    padding: 8px;
+    border-radius: 6px;
+    margin: 10px 0;
+  }
 }
 </style>
