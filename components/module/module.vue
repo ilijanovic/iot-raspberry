@@ -2,41 +2,29 @@
   <div class="module">
     <div class="head">
       <h3>{{ module.name }}</h3>
+      <div class="status"></div>
     </div>
-    <canvas ref="canvas"></canvas>
+    <div class="content">
+      <div class="buttonbox">
+        <primary class="btn"
+          >Ansehen<EyeIcon style="margin-left: 10px" size="1.3x"
+        /></primary>
+        <primary class="btn"
+          >Bearbeiten<Edit3Icon style="margin-left: 10px" size="1.3x"
+        /></primary>
+      </div>
+    </div>
   </div>
 </template>
 <script>
-import Chart from 'chart.js'
+import primary from '@/components/buttons/primary'
+import { EyeIcon, Edit3Icon } from 'vue-feather-icons'
 export default {
   props: ['module'],
-  chart: null,
-  created() {
-    this.$nextTick(() => {
-      let ctx = this.$refs.canvas.getContext('2d')
-      this.chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-          ],
-          datasets: [
-            {
-              label: 'My First dataset',
-              backgroundColor: '#34495e',
-              borderColor: '#bdc3c7',
-              data: [0, 10, 5, 2, 20, 30, 45],
-            },
-          ],
-        },
-      })
-    })
+  components: {
+    primary,
+    EyeIcon,
+    Edit3Icon,
   },
 }
 </script>
@@ -48,13 +36,37 @@ export default {
   box-shadow: var(--shadow);
   border-radius: 6px;
   margin-bottom: 20px;
+  canvas {
+    height: 100%;
+  }
   .head {
     background: var(--light-blue);
     border-radius: 6px 6px 0 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    align-items: center;
   }
   h3 {
-    padding: 10px 20px;
     color: var(--text-light);
+  }
+  .content {
+    padding: 10px;
+    .status {
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      background: rgb(0, 185, 0);
+    }
+    .buttonbox {
+      display: flex;
+      justify-content: space-between;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
 }
 </style>
