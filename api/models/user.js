@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
   modules: [
     {
       _id: {
+        type: mongoose.Types.ObjectId,
         default: mongoose.Types.ObjectId,
       },
       name: {

@@ -23,7 +23,14 @@ export async function addModuleHandler(req, res) {
       message: `Required propertie missing: ${!!name}, ${!!dataset}, ${!!type}`,
     })
 
-  let { modules } = await User.findOne({ _id: userId }, { modules: 1 })
-
-  return res.status(200).json(modules)
+  let module = await User.findOneAndUpdate(
+    { _id: userId },
+    {
+      $push: {
+        modules: { name, dataset, type, borderColor, backgroundColor },
+      },
+    }
+  )
+  console.log(module)
+  return res.status(200).json(module)
 }

@@ -6,7 +6,11 @@
 
     <div class="modules">
       <transition-group name="popup-list">
-        <module v-for="mod in modules" :module="mod" :key="mod._id" />
+        <module
+          v-for="mod in modules"
+          :module="mod"
+          :key="mod._id.toString()"
+        />
       </transition-group>
     </div>
   </div>

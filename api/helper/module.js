@@ -21,3 +21,5 @@ export function addModule(_id, options) {}
 export async function getModules(_id) {
   return (await User.findOne({ _id }, { modules: 1 })).modules
 }
+
+export async function deleteModule(userId, moduleId) {}
