@@ -1,14 +1,14 @@
 /**
  *  This is the controller for loging in
+ *  Expects "name" and "password" inside the request body
  *
  * @param {Object} req - Request Object
- * @property {String} name - The name of the user
- * @property {String | Number} password - Password of the user
  * @param {Object} res - Response Object
  */
 
 import { userExistNot, passwordWrong, criticalError } from '../helper/errors'
 import { getUserByNameSensitive, removeSensitiveData } from '../helper/user'
+import { setCookie } from '../helper/cookie'
 import bcrypt from 'bcrypt'
 import { generateToken } from './token'
 export async function loginHandler(req, res) {
@@ -26,6 +26,7 @@ export async function loginHandler(req, res) {
   try {
     let token = await generateToken(user)
     user = removeSensitiveData(user)
+    setCookie(res, token)
     return res.status(200).json({ user, token })
   } catch (err) {
     return criticalError(res)

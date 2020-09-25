@@ -6,11 +6,9 @@ import User from '../models/user'
 
 /**
  * This is the controller for registering new users.
+ * Expects "name", "password" and "passwordAgain" inside of the request body
  *
  * @param {Object} req - Request Object
- * @property {String} name - The name of the user that he wants to register
- * @property {String | Number} password - Password of the user
- * @property {String | Number} passwordAgain - Password confirmation
  * @param {Object} res - Response Object
  */
 

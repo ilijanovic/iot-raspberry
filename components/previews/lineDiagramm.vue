@@ -57,16 +57,33 @@ export default {
     backgroundColor: '#34495e',
   }),
   methods: {
-    save() {
-      this.saving = true
-      this.$store.commit('ADD_MODULE', {
-        name: this.name,
-        dataset: this.dataset,
-        borderColor: this.borderColor,
-        backgroundColor: this.backgroundColor,
-        type: 'lineChart',
-      })
-      this.$store.commit('modals/SET_MODULE_OPTIONS', false)
+    async save() {
+      try {
+        let {
+          name,
+          dataset,
+          borderColor,
+          backgroundColor,
+          type,
+        } = await this.$axios.$post('/api/addModule', {
+          name: this.name,
+          dataset: this.dataset,
+          borderColor: this.borderColor,
+          backgroundColor: this.backgroundColor,
+          type: 'lineChart',
+        })
+        this.saving = true
+        this.$store.commit('ADD_MODULE', {
+          name,
+          dataset,
+          borderColor,
+          backgroundColor,
+          type,
+        })
+        this.$store.commit('modals/SET_MODULE_OPTIONS', false)
+      } catch (err) {
+        console.log(err.response)
+      }
     },
     changeDataset() {
       this.chart.data.datasets[0].label = this.dataset

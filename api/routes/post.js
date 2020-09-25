@@ -4,6 +4,7 @@ const router = Router()
 import { loginHandler } from '../controllers/login'
 import { registerHandler } from '../controllers/register'
 import { auth } from '../controllers/auth'
+import { addModuleHandler } from '../controllers/module'
 
 /**
  * @route   /api/login
@@ -20,5 +21,13 @@ router.post('/login', loginHandler)
  */
 
 router.post('/register', registerHandler)
+
+/**
+ * @route   /api/addModule
+ * @type    POST
+ * @desc    Adds a new module to the user
+ */
+
+router.post('/addModule', addModuleHandler)
 
 export default router
