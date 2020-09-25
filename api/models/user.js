@@ -11,10 +11,30 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 8,
   },
-  modules: {
-    type: Array,
-    default: [],
-  },
+  modules: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      dataset: {
+        type: String,
+        required: true,
+      },
+      borderColor: {
+        type: String,
+        default: '#bdc3c7',
+      },
+      backgroundColor: {
+        type: String,
+        default: '#34495e',
+      },
+      type: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 })
 
 export default conn.model('User', userSchema)

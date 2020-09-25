@@ -1,9 +1,21 @@
 <template>
   <button>
     <slot></slot>
+    <ringLoader v-if="loading" />
   </button>
 </template>
-
+<script>
+import ringLoader from '@/components/loading/smallRing'
+export default {
+  props: {
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  components: { ringLoader },
+}
+</script>
 <style lang="scss" scoped>
 button {
   background: var(--light-blue);
@@ -16,7 +28,7 @@ button {
   box-shadow: var(--shadow);
   transition: 100ms;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   &:hover {
     background: var(--dark-blue);

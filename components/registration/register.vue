@@ -23,9 +23,12 @@
       <textButton @click.native="$emit('setcomponent', 'login')"
         >schon registriert?</textButton
       >
-      <primary :class="{ disabled: logging }" @click.native="register">
+      <primary
+        :loading="loading"
+        :class="{ disabled: logging }"
+        @click.native="register"
+      >
         <p style="margin-right: 5px">Registrieren</p>
-        <ringLoader v-if="loading" />
       </primary>
     </div>
     <div class="inputbox">
@@ -40,7 +43,6 @@
 <script>
 import primary from '@/components/buttons/primary'
 import textButton from '@/components/buttons/text'
-import ringLoader from '@/components/loading/smallRing'
 export default {
   data: () => ({
     name: '',
@@ -54,7 +56,6 @@ export default {
   components: {
     primary,
     textButton,
-    ringLoader,
   },
   methods: {
     async register() {

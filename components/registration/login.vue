@@ -15,9 +15,12 @@
       <textButton @click.native="$emit('setcomponent', 'register')"
         >Registrieren</textButton
       >
-      <primary :class="{ disabled: logging }" @click.native="login">
+      <primary
+        :loading="loading"
+        :class="{ disabled: logging }"
+        @click.native="login"
+      >
         <p style="margin-right: 5px">Login</p>
-        <ringLoader v-if="loading" />
       </primary>
     </div>
     <div class="inputbox">
@@ -32,7 +35,6 @@
 <script>
 import primary from '@/components/buttons/primary'
 import textButton from '@/components/buttons/text'
-import ringLoader from '@/components/loading/smallRing'
 export default {
   data: () => ({
     name: '',
@@ -70,7 +72,6 @@ export default {
   components: {
     primary,
     textButton,
-    ringLoader,
   },
 }
 </script>
