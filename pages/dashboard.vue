@@ -3,6 +3,7 @@
     <addModule
       @click.native="$store.commit('modals/SET_MODULE_OPTIONS', true)"
     />
+
     <div class="modules">
       <transition-group name="popup-list">
         <module v-for="mod in modules" :module="mod" :key="mod._id" />

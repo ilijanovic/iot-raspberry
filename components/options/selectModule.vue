@@ -30,6 +30,7 @@ export default {
       this.selectedPreview = diagramm
     },
   },
+
   components: {
     closeButton,
     diagrammDropdown,
@@ -45,14 +46,16 @@ export default {
   background: var(--background-light);
   border-radius: 10px;
   max-width: 600px;
+  max-height: 95vh;
   width: 95%;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
-  min-height: 700px;
+  min-height: 500px;
   box-shadow: var(--shadow);
   padding: 10px;
   border: 1px solid var(--border-color);
+  will-change: transform, opacity;
+  transform: translate3d(-50%, -50%, 0);
   .preview {
     max-height: 200px;
   }

@@ -2,6 +2,7 @@ export const state = () => ({
   logged: false,
   modules: [],
   user: null,
+  token: null,
 })
 
 export const mutations = {
@@ -63,6 +64,41 @@ export const mutations = {
 
   SET_USER(state, user) {
     state.user = user
+  },
+  /**
+   *
+   * Sets an token
+   *
+   * @param {Object} state - State of the current store
+   * @param {String} token - JWT token
+   */
+  SET_TOKEN(state, token) {
+    state.token = token
+  },
+}
+
+export const actions = {
+  /**
+   *
+   * This is a special Nuxt function
+   * It gets executed only once after a page refresh
+   *
+   */
+
+  async nuxtServerInit({ commit }, { req }) {
+    let { getTokenFromCookie } = await import('../api/helper/cookie')
+    let { verifyToken, decode } = await import('../api/helper/token')
+    let { getModules } = await import('../api/helper/module')
+    let token = getTokenFromCookie(req)
+    if (!token) return
+    if (await verifyToken(token)) {
+      let { name, _id } = decode(token)
+      let modules = await getModules(_id)
+      commit('SET_USER', name)
+      commit('SET_LOGIN', true)
+      commit('SET_MODULES', modules)
+      commit('SET_TOKEN', token)
+    }
   },
 }
 

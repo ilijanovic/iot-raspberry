@@ -41,7 +41,7 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [],
+  plugins: ['~plugins/axios.js'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -68,6 +68,11 @@ export default {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {},
+  build: {
+    // ....
+    babel: {
+      plugins: ['@babel/plugin-proposal-optional-chaining'],
+    },
+  },
   serverMiddleware: ['~/api/index'],
 }

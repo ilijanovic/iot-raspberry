@@ -46,3 +46,15 @@ export function criticalError(res) {
     message: 'Sorry, etwas ist schiefgelaufen',
   })
 }
+
+/**
+ * Response with an 500 error. Internal error
+ *
+ * @param {Object} - Express.js response object
+ */
+
+export function notAutorized(res) {
+  return res.status(402).json({
+    message: 'Zugriff verweigert. Bitte melden Sie sich neu an',
+  })
+}

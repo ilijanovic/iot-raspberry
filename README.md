@@ -17,6 +17,16 @@ $ npm run start
 $ npm run generate
 ```
 
+## MongoDB configuration
+
+The following configurations are required. The application wont work if you dont have it.
+For the database you will need to create an `.env` file in the root directory.
+
+Add the following information to make it work:
+
+    MONGODB_URI=<YOUR MONGODB URI>
+    PRIVATE_KEY=<YOUR PRIVATE KEY FOR THE JSON WEB TOKEN (JWT)>
+
 ## General configuration
 
 Under `/api/config/config.js` you are able to set some general configurations like:
@@ -24,12 +34,3 @@ Under `/api/config/config.js` you are able to set some general configurations li
 1. `saltRounds`: For your password hashing. Default is 10
 2. `tokenExpiration`: Expiration time for your JWT. Default is 1h (3600000)
 3. `cookieName`: Set the name of your cookie that holds the token
-
-## MongoDB configuration
-
-For the database you will need to create an `.env` file in the root directory.
-
-Add the following information to make it work:
-
-    MONGODB_URI=<YOUR MONGODB URI>
-    PRIVATE_KEY=<YOUR PRIVATE KEY FOR THE JSON WEB TOKEN (JWT)>

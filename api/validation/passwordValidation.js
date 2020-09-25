@@ -1,3 +1,7 @@
+import bcrypt from 'bcrypt'
+import { config } from '../config/config'
+let { saltRounds } = config
+
 /**
  *
  * Validates the name. Trims the name if the name is valid otherwise rejects with an error.
@@ -8,9 +12,6 @@
  * @returns {Promise} - Returns an resolved hashed password or if its reject it returns the error message
  */
 
-import bcrypt from 'bcrypt'
-import { config } from '../config/config'
-let { saltRounds } = config
 export function passwordValidation(password, passwordAgain) {
   return new Promise((resolve, rej) => {
     if (typeof password !== 'string' && typeof password !== 'number')

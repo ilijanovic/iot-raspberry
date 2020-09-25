@@ -10,7 +10,7 @@ import { userExistNot, passwordWrong, criticalError } from '../helper/errors'
 import { getUserByNameSensitive, removeSensitiveData } from '../helper/user'
 import { setCookie } from '../helper/cookie'
 import bcrypt from 'bcrypt'
-import { generateToken } from './token'
+import { generateToken } from '../helper/token'
 export async function loginHandler(req, res) {
   let { name, password } = req.body
 

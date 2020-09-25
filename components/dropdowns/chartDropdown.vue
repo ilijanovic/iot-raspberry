@@ -76,6 +76,7 @@ export default {
   }
   .drop {
     width: calc(100% + 2px);
+    z-index: 10;
     top: 100%;
     z-index: 10;
     left: -1px;

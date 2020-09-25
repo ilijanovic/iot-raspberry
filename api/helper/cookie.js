@@ -14,3 +14,21 @@ export function setCookie(res, token) {
     maxAge: tokenExpiration,
   })
 }
+
+/**
+ *
+ * Extracts the token out of the cookie in the header if available
+ *
+ * @param {Object} req - Request Object
+ */
+
+export function getTokenFromCookie(req) {
+  let { cookieName } = config
+  let cookieString = req.headers.cookie
+  let keyValueEntrie = cookieString
+    .split(';')
+    .map((keyValue) => keyValue.split('=').map((val) => val.trim()))
+    .find(([name]) => name === cookieName)
+  if (!keyValueEntrie) return false
+  return keyValueEntrie[1]
+}

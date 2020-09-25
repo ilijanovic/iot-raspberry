@@ -48,3 +48,14 @@ export function verifyToken(token) {
 export function decode(token) {
   return jwt.decode(token)
 }
+
+/**
+ * Extracts the token out of the authorization header
+ *
+ * @param {Object} req - Request object
+ * @returns {String} - returns JWT
+ */
+export function getTokenFromHeader(req) {
+  if (!req.headers.authorization) return false
+  return req.headers.authorization.split(' ')[1]
+}

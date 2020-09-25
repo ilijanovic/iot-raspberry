@@ -28,6 +28,6 @@ router.post('/register', registerHandler)
  * @desc    Adds a new module to the user
  */
 
-router.post('/addModule', addModuleHandler)
+router.post('/addModule', auth, addModuleHandler)
 
 export default router
