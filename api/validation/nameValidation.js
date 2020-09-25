@@ -24,6 +24,14 @@ export function nameValidation(name) {
   })
 }
 
+
+/*
+* Checks if the string has whitespaces in it
+*
+* @param {String} s - String that needs to be tested for whitespace
+* @returns {Boolean} - Returns "true" if the string has whitespace in it otherwise "false"
+*/
+
 function hasWhiteSpace(s) {
   return /\s/g.test(s)
 }
