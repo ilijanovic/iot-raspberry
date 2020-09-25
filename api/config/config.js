@@ -9,6 +9,6 @@
 
 export const config = {
   saltRounds: 10,
-  tokenExpiration: 3600000, // = 1h
+  tokenExpiration: 3600000, //  1h
   cookieName: 'iot',
 }
