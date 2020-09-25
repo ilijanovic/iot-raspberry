@@ -1,6 +1,6 @@
 /**
  *
- * Validates the name. Trims the name if the name is valid otherwise response with an error.
+ * Validates the name. Trims the name if the name is valid otherwise rejects with an error.
  * Status code 400 Bad request
  *
  * @param {String} password - The incoming password from the POST body
