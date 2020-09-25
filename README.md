@@ -17,7 +17,7 @@ $ npm run start
 $ npm run generate
 ```
 
-## Generell configuration
+## General configuration
 
 Under `/api/config/config.js` you are able to set some general configurations like:
 
