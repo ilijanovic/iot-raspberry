@@ -9,7 +9,7 @@ import User from '../models/user'
  * @param {Object} res -  Response Object
  */
 
-export function addModuleHandler(req, res) {
+export async function addModuleHandler(req, res) {
   let {
     name,
     dataset,
@@ -17,9 +17,13 @@ export function addModuleHandler(req, res) {
     borderColor = null,
     backgroundColor = null,
   } = req.body
-
+  let { userId } = res.locals
   if (!name || !dataset || !type)
     return res.status(400).json({
       message: `Required propertie missing: ${!!name}, ${!!dataset}, ${!!type}`,
     })
+
+  let { modules } = await User.findOne({ _id: userId }, { modules: 1 })
+
+  return res.status(200).json(modules)
 }
