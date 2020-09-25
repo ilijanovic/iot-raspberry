@@ -1,6 +1,7 @@
 export const state = () => ({
   logged: false,
   modules: [],
+  user: null,
 })
 
 export const mutations = {
@@ -39,9 +40,34 @@ export const mutations = {
   SET_LOGIN(state, payload) {
     state.logged = payload
   },
+
+  /**
+   *
+   * Sets the modules thats being displayed
+   *
+   * @param {Object} state - State of the current store
+   * @param {Array} modules -  Array of objects. Containing data about the module
+   */
+
+  SET_MODULES(state, modules) {
+    state.modules = modules
+  },
+
+  /**
+   *
+   * Sets the username
+   *
+   * @param {Object} state - State of the current store
+   * @param {String} user - Name of the logged user
+   */
+
+  SET_USER(state, user) {
+    state.user = user
+  },
 }
 
 export const getters = {
   modules: (state) => state.modules,
   logged: (state) => state.logged,
+  user: (state) => state.user,
 }

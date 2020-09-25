@@ -15,7 +15,10 @@
       <textButton @click.native="$emit('setcomponent', 'register')"
         >Registrieren</textButton
       >
-      <primary @click.native="login">Login</primary>
+      <primary :class="{ disabled: logging }" @click.native="login">
+        <p style="margin-right: 5px">Login</p>
+        <ringLoader v-if="loading" />
+      </primary>
     </div>
     <div class="inputbox">
       <transition name="popup-bounce">
@@ -29,18 +32,23 @@
 <script>
 import primary from '@/components/buttons/primary'
 import textButton from '@/components/buttons/text'
+import ringLoader from '@/components/loading/smallRing'
 export default {
   data: () => ({
     name: '',
     password: '',
     errorMessage: null,
     success: false,
+    logging: false,
+    loading: false,
   }),
   methods: {
     async login() {
       this.errorMessage = null
+      this.logging = true
+      this.loading = true
       try {
-        await this.$axios.$post('/api/login', {
+        let { user, token } = await this.$axios.$post('/api/login', {
           name: this.name,
           password: this.password,
         })
@@ -48,15 +56,21 @@ export default {
         setTimeout(() => {
           this.$router.push('/dashboard')
         }, 1500)
+        let { name, modules } = user
         this.$store.commit('SET_LOGIN', true)
+        this.$store.commit('SET_USER', name)
+        this.$store.commit('SET_MODULES', modules)
       } catch ({ response: { data } }) {
         this.errorMessage = data.message
+        this.logging = false
       }
+      this.loading = false
     },
   },
   components: {
     primary,
     textButton,
+    ringLoader,
   },
 }
 </script>

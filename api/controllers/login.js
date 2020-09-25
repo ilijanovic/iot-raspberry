@@ -7,21 +7,27 @@
  * @param {Object} res - Response Object
  */
 
-import { userExistNot, passwordWrong } from '../helper/errors'
-import { getUserByName } from '../helper/user'
+import { userExistNot, passwordWrong, criticalError } from '../helper/errors'
+import { getUserByNameSensitive, removeSensitiveData } from '../helper/user'
 import bcrypt from 'bcrypt'
+import { generateToken } from './token'
 export async function loginHandler(req, res) {
   let { name, password } = req.body
 
   if (typeof name !== 'string') return userExistNot(res)
 
-  let user = await getUserByName(name.trim())
+  let user = await getUserByNameSensitive(name.trim())
 
   if (!user) return userExistNot(res)
 
   let passwordEqual = await bcrypt.compare(password, user.hashedPassword)
 
   if (!passwordEqual) return passwordWrong(res)
-
-  return res.status(200).json({ user })
+  try {
+    let token = await generateToken(user)
+    user = removeSensitiveData(user)
+    return res.status(200).json({ user, token })
+  } catch (err) {
+    return criticalError(res)
+  }
 }

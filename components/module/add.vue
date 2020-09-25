@@ -1,14 +1,21 @@
 <template>
   <div class="add">
     <h2>IoT</h2>
+    <p v-if="user">Benutzer: {{ user }}</p>
     <primary> Hinzufügen </primary>
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import primary from '@/components/buttons/primary'
 export default {
   components: {
     primary,
+  },
+  computed: {
+    ...mapGetters({
+      user: 'user',
+    }),
   },
 }
 </script>

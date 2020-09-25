@@ -15,6 +15,9 @@ button {
   cursor: pointer;
   box-shadow: var(--shadow);
   transition: 100ms;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   &:hover {
     background: var(--dark-blue);
   }

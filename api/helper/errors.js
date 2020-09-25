@@ -34,3 +34,15 @@ export function passwordWrong(res) {
     message: 'Passwort stimmt nicht überein',
   })
 }
+
+/**
+ * Response with an 500 error. Internal error
+ *
+ * @param {Object} - Express.js response object
+ */
+
+export function criticalError(res) {
+  return res.status(500).json({
+    message: 'Sorry, etwas ist schiefgelaufen',
+  })
+}

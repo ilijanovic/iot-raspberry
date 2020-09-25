@@ -28,7 +28,6 @@
         text-align: right;
       "
     >
-      <spinner v-if="saving" />
       <add
         :class="{ disabled: saving }"
         @click.native="save"
@@ -43,13 +42,11 @@
 import Chart from 'chart.js'
 import chartColor from '@/components/dropdowns/line/chartColors'
 import add from '@/components/buttons/primary'
-import spinner from '@/components/spinner/popup'
 
 export default {
   components: {
     chartColor,
     add,
-    spinner,
   },
   data: () => ({
     chart: null,

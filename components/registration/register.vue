@@ -23,7 +23,10 @@
       <textButton @click.native="$emit('setcomponent', 'login')"
         >schon registriert?</textButton
       >
-      <primary @click.native="register">Registrieren</primary>
+      <primary :class="{ disabled: logging }" @click.native="register">
+        <p style="margin-right: 5px">Registrieren</p>
+        <ringLoader v-if="loading" />
+      </primary>
     </div>
     <div class="inputbox">
       <transition name="popup-bounce">
@@ -37,6 +40,7 @@
 <script>
 import primary from '@/components/buttons/primary'
 import textButton from '@/components/buttons/text'
+import ringLoader from '@/components/loading/smallRing'
 export default {
   data: () => ({
     name: '',
@@ -44,14 +48,19 @@ export default {
     passwordAgain: '',
     errorMessage: null,
     success: false,
+    logging: false,
+    loading: false,
   }),
   components: {
     primary,
     textButton,
+    ringLoader,
   },
   methods: {
     async register() {
       this.errorMessage = null
+      this.logging = true
+      this.loading = true
       try {
         await this.$axios.$post('/api/register', {
           name: this.name,
@@ -64,7 +73,9 @@ export default {
         this.success = true
       } catch ({ response: { data } }) {
         this.errorMessage = data.message
+        this.logging = false
       }
+      this.loading = false
     },
   },
 }

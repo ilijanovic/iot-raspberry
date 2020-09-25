@@ -3,20 +3,19 @@ import { config } from '../config/config'
 /**
  * Creates an JSON web token (JWT)
  *
- * @param {Object} user - User object from the Database
  * @property {String} name - Name of the user
  * @property {String} _id - User ID
  * @returns {Promise} Resolves an JWT
  */
 
-export function generateToken(user) {
+export function generateToken({ name, _id }) {
   return new Promise((res, rej) => {
     jwt.sign(
-      { name: user.name, _id: user._id },
-      process.env.PRIVATE_KEY,
-      { algorithm: 'RS256', expiresIn: config.tokenExpiration },
+      { name, _id },
+      process.env.PRIVATE_KEY.replace(/\\n/gm, '\n'),
+      { expiresIn: config.tokenExpiration },
       (err, token) => {
-        if (err) rej('Something went wrong while generating the token')
+        if (err) rej(err)
         res(token)
       }
     )
