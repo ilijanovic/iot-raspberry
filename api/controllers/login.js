@@ -1,3 +1,13 @@
+/*
+* This is the controller for loging in
+* 
+* @param {Object} req - Request Object
+* @property {String} name - The name of the user
+* @property {String | Number} password - Password of the user
+* @param {Object} res - Response Object
+*/
+
+
 import { userExistNot, passwordWrong } from '../helper/errors'
 import { getUserByName } from '../helper/user'
 import bcrypt from 'bcrypt'
