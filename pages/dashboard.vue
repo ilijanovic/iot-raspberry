@@ -17,6 +17,7 @@ import addModule from '@/components/module/add'
 import module from '@/components/module/module'
 export default {
   layout: 'dashboard',
+  middleware: ['auth'],
   components: {
     addModule,
     module,

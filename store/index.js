@@ -1,4 +1,5 @@
 export const state = () => ({
+  logged: false,
   modules: [],
 })
 
@@ -26,8 +27,21 @@ export const mutations = {
       state.modules.splice(index, 1)
     }
   },
+
+  /**
+   *
+   * Loggs in or loggs off the user
+   *
+   * @param {Object} state - State of the current store
+   * @param {Boolean} payload -  Set "true" if you want to login otherwise "false"
+   */
+
+  SET_LOGIN(state, payload) {
+    state.logged = payload
+  },
 }
 
 export const getters = {
   modules: (state) => state.modules,
+  logged: (state) => state.logged,
 }

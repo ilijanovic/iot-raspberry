@@ -1,3 +1,9 @@
+import { nameValidation } from '../validation/nameValidation'
+import { passwordValidation } from '../validation/passwordValidation'
+import { getUserByName } from '../helper/user'
+import { userAlreadyExist } from '../helper/errors'
+import User from '../models/user'
+
 /**
  * This is the controller for registering new users.
  *
@@ -8,11 +14,6 @@
  * @param {Object} res - Response Object
  */
 
-import { nameValidation } from '../validation/nameValidation'
-import { passwordValidation } from '../validation/passwordValidation'
-import { getUserByName } from '../helper/user'
-import { userAlreadyExist } from '../helper/errors'
-import User from '../models/user'
 export async function registerHandler(req, res) {
   let { name, password, passwordAgain } = req.body
 

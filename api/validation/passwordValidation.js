@@ -9,7 +9,7 @@
  */
 
 import bcrypt from 'bcrypt'
-import config from '../config/config'
+import { config } from '../config/config'
 let { saltRounds } = config
 export function passwordValidation(password, passwordAgain) {
   return new Promise((resolve, rej) => {

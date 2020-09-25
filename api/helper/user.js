@@ -1,5 +1,4 @@
 import User from '../models/user'
-import bcrypt from 'bcrypt'
 /**
  *
  * Gets the user by his Mongodb object ID

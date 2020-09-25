@@ -48,6 +48,7 @@ export default {
         setTimeout(() => {
           this.$router.push('/dashboard')
         }, 1500)
+        this.$store.commit('SET_LOGIN', true)
       } catch ({ response: { data } }) {
         this.errorMessage = data.message
       }
