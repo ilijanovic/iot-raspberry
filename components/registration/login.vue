@@ -15,11 +15,7 @@
       <textButton @click.native="$emit('setcomponent', 'register')"
         >Registrieren</textButton
       >
-      <primary
-        :loading="loading"
-        :class="{ disabled: logging }"
-        @click.native="login"
-      >
+      <primary :loading="loading" @click.native="login">
         <p style="margin-right: 5px">Login</p>
       </primary>
     </div>

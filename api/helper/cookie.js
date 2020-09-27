@@ -5,13 +5,15 @@ import { config } from '../config/config'
  * Adds an HTTP-only cookie to the response header
  *
  * @param {Object} res - Response object
+ * @param {String} token - JSON web token
+ * @param {Number | null} expiration - Sets the expiration time manually
  */
 
-export function setCookie(res, token) {
+export function setCookie(res, token, expiration = null) {
   let { cookieName, tokenExpiration } = config
   res.cookie(cookieName, token, {
     httpOnly: true,
-    maxAge: tokenExpiration,
+    maxAge: expiration === null ? tokenExpiration : expiration,
   })
 }
 

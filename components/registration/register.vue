@@ -23,11 +23,7 @@
       <textButton @click.native="$emit('setcomponent', 'login')"
         >schon registriert?</textButton
       >
-      <primary
-        :loading="loading"
-        :class="{ disabled: logging }"
-        @click.native="register"
-      >
+      <primary :loading="loading" @click.native="register">
         <p style="margin-right: 5px">Registrieren</p>
       </primary>
     </div>

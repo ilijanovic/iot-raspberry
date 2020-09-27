@@ -18,21 +18,31 @@ export async function addModuleHandler(req, res) {
     type,
     borderColor = null,
     backgroundColor = null,
+    chartType,
   } = req.body
   let { userId } = res.locals
   if (!name || !dataset || !type)
     return res.status(400).json({
-      message: `Required propertie missing: ${!!name}, ${!!dataset}, ${!!type}`,
+      message: `Required propertie missing: ${!name}, ${!dataset}, ${!type}, ${!chartType}`,
     })
 
-  let module = await User.findOneAndUpdate(
+  let { modules } = await User.findOneAndUpdate(
     { _id: userId },
     {
       $push: {
-        modules: { name, dataset, type, borderColor, backgroundColor },
+        modules: {
+          name,
+          dataset,
+          type,
+          borderColor,
+          backgroundColor,
+          chartType,
+        },
       },
-    }
+    },
+    { new: true }
   )
+  let module = modules[modules.length - 1]
   return res.status(200).json(module)
 }
 

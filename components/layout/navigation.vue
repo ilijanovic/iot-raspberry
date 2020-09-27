@@ -7,7 +7,7 @@
       @click.native="$store.commit('modals/SET_MODULE_OPTIONS', true)"
       >Hinzufügen</primary
     >
-    <primary>Logout</primary>
+    <primary @click.native="logout">Logout</primary>
   </div>
 </template>
 <script>
@@ -21,6 +21,15 @@ export default {
     ...mapGetters({
       user: 'user',
     }),
+  },
+  methods: {
+    async logout() {
+      try {
+        await this.$axios.$post('/api/logout')
+      } catch (err) {
+        console.log(err)
+      }
+    },
   },
 }
 </script>

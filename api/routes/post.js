@@ -5,6 +5,7 @@ import { loginHandler } from '../controllers/login'
 import { registerHandler } from '../controllers/register'
 import { auth } from '../controllers/auth'
 import { addModuleHandler, deleteModuleHandler } from '../controllers/module'
+import { logoutHandler } from '../controllers/logout'
 
 /**
  * @route   /api/login
@@ -13,6 +14,14 @@ import { addModuleHandler, deleteModuleHandler } from '../controllers/module'
  */
 
 router.post('/login', loginHandler)
+
+/**
+ * @route   /api/logout
+ * @type    POST
+ * @desc    Logs the user out
+ */
+
+router.post('/logout', auth, logoutHandler)
 
 /**
  * @route   /api/register

@@ -15,5 +15,6 @@ export async function auth(req, res, next) {
   if (!(await verifyToken(token))) return notAutorized(res)
   let { _id } = decode(token)
   res.locals.userId = _id
+  res.locals.token = token
   next()
 }

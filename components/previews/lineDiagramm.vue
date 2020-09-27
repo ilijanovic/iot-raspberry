@@ -29,6 +29,7 @@
       "
     >
       <add
+        :loading="loading"
         :class="{ disabled: saving }"
         @click.native="save"
         style="margin-left: auto"
@@ -55,9 +56,11 @@ export default {
     saving: false,
     borderColor: '#bdc3c7',
     backgroundColor: '#34495e',
+    loading: false,
   }),
   methods: {
     async save() {
+      this.loading = true
       try {
         let {
           name,
@@ -66,12 +69,14 @@ export default {
           backgroundColor,
           type,
           _id,
+          chartType,
         } = await this.$axios.$post('/api/addModule', {
           name: this.name,
           dataset: this.dataset,
           borderColor: this.borderColor,
           backgroundColor: this.backgroundColor,
           type: 'lineChart',
+          chartType: 'line',
         })
         this.saving = true
         this.$store.commit('ADD_MODULE', {
@@ -81,11 +86,13 @@ export default {
           backgroundColor,
           type,
           _id,
+          chartType,
         })
         this.$store.commit('modals/SET_MODULE_OPTIONS', false)
       } catch (err) {
         console.log(err.response)
       }
+      this.saving = false
     },
     changeDataset() {
       this.chart.data.datasets[0].label = this.dataset
@@ -95,10 +102,12 @@ export default {
       this.chart.update()
     },
     setBorder(color) {
+      this.borderColor = color
       this.chart.data.datasets[0].borderColor = color
       this.updateChart()
     },
     setBackground(color) {
+      this.backgroundColor = color
       this.chart.data.datasets[0].backgroundColor = color
       this.updateChart()
     },

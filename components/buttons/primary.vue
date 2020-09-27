@@ -1,7 +1,7 @@
 <template>
-  <button>
+  <button :class="{ disabled: loading }">
     <slot></slot>
-    <ringLoader v-if="loading" />
+    <ringLoader style="margin-left: 8px" v-if="loading" />
   </button>
 </template>
 <script>

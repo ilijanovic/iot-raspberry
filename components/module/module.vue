@@ -75,8 +75,9 @@ export default {
   mounted() {
     this.$nextTick(() => {
       let ctx = this.$refs.canvas.getContext('2d')
+      let { chartType, datasets, borderColor, backgroundColor } = this.module
       this.chart = new Chart(ctx, {
-        type: 'line',
+        type: chartType,
         data: {
           labels: [
             'January',
@@ -89,9 +90,9 @@ export default {
           ],
           datasets: [
             {
-              label: 'My First dataset',
-              backgroundColor: '#34495e',
-              borderColor: '#bdc3c7',
+              label: datasets,
+              backgroundColor,
+              borderColor,
               data: [0, 10, 5, 2, 20, 30, 45],
             },
           ],
