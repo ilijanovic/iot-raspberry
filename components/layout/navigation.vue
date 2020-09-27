@@ -1,7 +1,7 @@
 <template>
   <div class="add">
     <h2>IoT</h2>
-    <p v-if="user">Benutzer: {{ user }}</p>
+    <p style="margin: auto" v-if="user">Benutzer: {{ user }}</p>
     <primary
       class="addbutton"
       @click.native="$store.commit('modals/SET_MODULE_OPTIONS', true)"

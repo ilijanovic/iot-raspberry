@@ -37,6 +37,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      chartType: {
+        required: true,
+        type: String,
+      },
     },
   ],
 })
