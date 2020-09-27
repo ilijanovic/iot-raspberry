@@ -2,6 +2,7 @@ import User from '../models/user'
 import { isValidObjectId } from '../validation/objectId'
 import { deleteModule } from '../helper/module'
 import { criticalError } from '../helper/errors'
+import { checkChartType } from '../validation/chart'
 /**
  *
  * Adds new module to an user
@@ -26,6 +27,9 @@ export async function addModuleHandler(req, res) {
       message: `Required propertie missing: ${!name}, ${!dataset}, ${!type}, ${!chartType}`,
     })
 
+  if (!chartType(chartType))
+    return res.status(400).json({ message: 'Invalid charttype' })
+
   let { modules } = await User.findOneAndUpdate(
     { _id: userId },
     {
@@ -37,6 +41,7 @@ export async function addModuleHandler(req, res) {
           borderColor,
           backgroundColor,
           chartType,
+          dataOptions,
         },
       },
     },
