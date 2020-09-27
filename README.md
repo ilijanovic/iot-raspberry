@@ -1,4 +1,6 @@
-# iot
+# Dashboard for IoT devices.
+
+Project is still under development.
 
 ## Build Setup
 
