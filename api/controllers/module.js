@@ -1,5 +1,7 @@
 import User from '../models/user'
-
+import { isValidObjectId } from '../validation/objectId'
+import { deleteModule } from '../helper/module'
+import { criticalError } from '../helper/errors'
 /**
  *
  * Adds new module to an user
@@ -31,6 +33,20 @@ export async function addModuleHandler(req, res) {
       },
     }
   )
-  console.log(module)
   return res.status(200).json(module)
+}
+
+export async function deleteModuleHandler(req, res) {
+  let { userId } = res.locals
+  let { moduleId } = req.body
+  if (!moduleId) return res.status(400).json({ message: 'Missing credentials' })
+  if (!isValidObjectId(moduleId))
+    return res.status(400).json({ message: 'ID is not valid ObjectId' })
+
+  try {
+    await deleteModule(userId, moduleId)
+    return res.status(200).json({ message: 'Module successfully deleted' })
+  } catch (err) {
+    return criticalError(res)
+  }
 }

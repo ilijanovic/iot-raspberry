@@ -65,6 +65,7 @@ export default {
           borderColor,
           backgroundColor,
           type,
+          _id,
         } = await this.$axios.$post('/api/addModule', {
           name: this.name,
           dataset: this.dataset,
@@ -79,6 +80,7 @@ export default {
           borderColor,
           backgroundColor,
           type,
+          _id,
         })
         this.$store.commit('modals/SET_MODULE_OPTIONS', false)
       } catch (err) {
@@ -128,9 +130,9 @@ export default {
       })
     })
   },
- destroyed(){
-    this.chart.destroy();
-  }
+  destroyed() {
+    this.chart.destroy()
+  },
 }
 </script>
 

@@ -24,7 +24,7 @@ export default {
       this.$store.commit('modals/CLOSE_MODAL', 'warning')
     },
     deleteModule() {
-      this.$store.commit('DELETE_MODULE', this.id)
+      this.$store.dispatch('DELETE_MODULE', this.id)
       this.$store.commit('modals/CLOSE_MODAL', 'warning')
     },
   },

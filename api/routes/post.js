@@ -4,7 +4,7 @@ const router = Router()
 import { loginHandler } from '../controllers/login'
 import { registerHandler } from '../controllers/register'
 import { auth } from '../controllers/auth'
-import { addModuleHandler } from '../controllers/module'
+import { addModuleHandler, deleteModuleHandler } from '../controllers/module'
 
 /**
  * @route   /api/login
@@ -29,5 +29,13 @@ router.post('/register', registerHandler)
  */
 
 router.post('/addModule', auth, addModuleHandler)
+
+/**
+ * @route   /api/deleteModule
+ * @type    POST
+ * @desc    Deletes an module
+ */
+
+router.post('/deleteModule', auth, deleteModuleHandler)
 
 export default router

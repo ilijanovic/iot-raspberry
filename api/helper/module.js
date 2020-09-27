@@ -22,4 +22,15 @@ export async function getModules(_id) {
   return (await User.findOne({ _id }, { modules: 1 })).modules
 }
 
-export async function deleteModule(userId, moduleId) {}
+export async function deleteModule(userId, moduleId) {
+  return await User.updateOne(
+    { _id: userId },
+    {
+      $pull: {
+        modules: {
+          _id: moduleId,
+        },
+      },
+    }
+  )
+}

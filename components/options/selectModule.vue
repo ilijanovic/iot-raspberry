@@ -56,6 +56,7 @@ export default {
   border: 1px solid var(--border-color);
   will-change: transform, opacity;
   transform: translate3d(-50%, -50%, 0);
+  z-index: 100;
   .preview {
     max-height: 200px;
   }

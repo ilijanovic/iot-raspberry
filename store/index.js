@@ -23,8 +23,8 @@ export const mutations = {
    * @param {String} id -  MongoDB Object ID. Its the id of the module that needs to be deleted
    */
 
-  DELETE_MODULE(state, id) {
-    let index = state.modules.findIndex((module) => module.id === id)
+  async DELETE_MODULE(state, id) {
+    let index = state.modules.findIndex((module) => module._id === id)
     if (index !== -1) {
       state.modules.splice(index, 1)
     }
@@ -99,6 +99,15 @@ export const actions = {
       commit('SET_MODULES', modules)
       commit('SET_TOKEN', token)
     }
+  },
+
+  async DELETE_MODULE({ commit }, id) {
+    try {
+      await this.$axios.$post('/api/deleteModule', {
+        moduleId: id,
+      })
+      commit('DELETE_MODULE', id)
+    } catch (err) {}
   },
 }
 

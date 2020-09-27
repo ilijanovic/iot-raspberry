@@ -31,6 +31,9 @@ export default {
   border-bottom: 1px solid var(--border-color);
   box-shadow: var(--shadow);
   display: flex;
+  position: sticky;
+  top: 0;
+  background: var(--background-light);
   align-items: center;
   justify-content: space-between;
   padding: 10px;
