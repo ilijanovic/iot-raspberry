@@ -1,9 +1,6 @@
 <template>
   <div class="container">
-    <addModule
-      @click.native="$store.commit('modals/SET_MODULE_OPTIONS', true)"
-    />
-
+    <navigation />
     <div class="modules">
       <transition-group name="popup-list">
         <module
@@ -18,13 +15,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import addModule from '@/components/module/add'
+import navigation from '@/components/layout/navigation'
 import module from '@/components/module/module'
 export default {
   layout: 'dashboard',
   middleware: ['auth'],
   components: {
-    addModule,
+    navigation,
     module,
   },
   computed: {

@@ -128,6 +128,9 @@ export default {
       })
     })
   },
+ destroyed(){
+    this.chart.destroy();
+  }
 }
 </script>
 

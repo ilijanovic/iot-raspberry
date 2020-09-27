@@ -2,7 +2,12 @@
   <div class="add">
     <h2>IoT</h2>
     <p v-if="user">Benutzer: {{ user }}</p>
-    <primary> Hinzufügen </primary>
+    <primary
+      class="addbutton"
+      @click.native="$store.commit('modals/SET_MODULE_OPTIONS', true)"
+      >Hinzufügen</primary
+    >
+    <primary>Logout</primary>
   </div>
 </template>
 <script>
@@ -31,6 +36,10 @@ export default {
   padding: 10px;
   h2 {
     color: var(--text-dark);
+  }
+  .addbutton {
+    margin-left: auto;
+    margin-right: 10px;
   }
 }
 </style>
