@@ -35,7 +35,7 @@ Add the following information to make it work:
 
 Under `/api/config/config.js` you are able to set some general configurations like:
 
-| option          | description                                       | defaul  | type    | unit |
+| option          | description                                       | default | type    | unit |
 | --------------- | ------------------------------------------------- | ------- | ------- | ---- |
 | saltRounds      | For password hashing                              | 10      | integer | -    |
 | tokenExpiration | Expiration time for the JSON web token (jwt).     | 3600000 | integer | ms   |
