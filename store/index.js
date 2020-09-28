@@ -89,6 +89,7 @@ export const actions = {
     let { getTokenFromCookie } = await import('../api/helper/cookie')
     let { verifyToken, decode } = await import('../api/helper/token')
     let { getModules } = await import('../api/helper/module')
+    console.log(req.headers)
     let token = getTokenFromCookie(req)
     if (!token) return
     if (await verifyToken(token)) {

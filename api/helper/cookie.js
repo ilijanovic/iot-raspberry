@@ -27,6 +27,7 @@ export function setCookie(res, token, expiration = null) {
 export function getTokenFromCookie(req) {
   let { cookieName } = config
   let cookieString = req.headers.cookie
+  if (!cookieString) return false
   let keyValueEntrie = cookieString
     .split(';')
     .map((keyValue) => keyValue.split('=').map((val) => val.trim()))

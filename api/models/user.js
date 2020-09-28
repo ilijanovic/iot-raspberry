@@ -21,18 +21,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      dataset: {
-        type: String,
-        required: true,
-      },
-      borderColor: {
-        type: String,
-        default: '#bdc3c7',
-      },
-      backgroundColor: {
-        type: String,
-        default: '#34495e',
-      },
       type: {
         type: String,
         required: true,
