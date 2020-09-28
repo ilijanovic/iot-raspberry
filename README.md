@@ -26,6 +26,8 @@ $ npm run generate
 The following configurations are required. The application wont work if you dont have it.
 For the database you will need to create an `.env` file in the root directory.
 
+Inside of the `.env` you can define your enviroment variables for sensitive data like database password so it wont be exposed to the public.
+
 Add the following information to make it work:
 
     MONGODB_URI=<YOUR MONGODB URI>
