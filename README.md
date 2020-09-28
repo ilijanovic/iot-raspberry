@@ -35,6 +35,11 @@ Add the following information to make it work:
 
 Under `/api/config/config.js` you are able to set some general configurations like:
 
-1. `saltRounds`: For your password hashing. Default is 10
-2. `tokenExpiration`: Expiration time for your JWT. Default is 1h (3600000)
-3. `cookieName`: Set the name of your cookie that holds the token
+| option          | description                                       | defaul  | type    | unit |
+| --------------- | ------------------------------------------------- | ------- | ------- | ---- |
+| saltRounds      | For password hashing                              | 10      | integer | -    |
+| tokenExpiration | Expiration time for the JSON web token (jwt).     | 3600000 | integer | ms   |
+| cookieName      | Sets the name of your cookie that holds the token | "iot"   | string  | -    |
+
+Note here: cookie expiration time == token expiration time
+The cookie deletes itself after that given amount of time
