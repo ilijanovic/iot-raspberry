@@ -2,6 +2,8 @@
 
 Project is still under development.
 
+Version is currently in German. English version will come later on.
+
 ## Build Setup
 
 ```bash
