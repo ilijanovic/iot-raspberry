@@ -6,6 +6,9 @@
     </div>
     <div class="content">
       <div class="chart">
+        <p>
+          <b>Socket ID:</b> <small>{{ module.socketId }}</small>
+        </p>
         <component :is="module.type" />
         <div style="flex: 1" :class="{ canvas: open }">
           <canvas style="margin-left: auto" ref="canvas"></canvas>

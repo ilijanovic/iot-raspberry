@@ -69,8 +69,8 @@ export function deleteModule(userId, moduleId) {
  * @param {Object} moduleId - Module ID (mongoDB ID)
  */
 
-export function addSocketIdToModule(socketId, userId, moduleId) {
-  return User.findOneAndUpdate(
+export async function addSocketIdToModule(socketId, userId, moduleId) {
+  let { modules } = await User.findOneAndUpdate(
     { _id: userId, 'modules._id': moduleId },
     {
       $set: {
@@ -79,4 +79,5 @@ export function addSocketIdToModule(socketId, userId, moduleId) {
     },
     { new: true }
   )
+  return modules[modules.length - 1]
 }

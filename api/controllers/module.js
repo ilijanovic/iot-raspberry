@@ -3,7 +3,7 @@ import { deleteModule, addModule, addSocketIdToModule } from '../helper/module'
 import { criticalError } from '../helper/errors'
 import { checkChartType, getDefaultOptions } from '../validation/chart'
 import { addSocketId } from '../helper/socket'
-import {checkMissingParams} from "../validation/requestParam"
+import { checkMissingParams } from '../validation/requestParam'
 /**
  *
  * Adds new module to an user
@@ -23,14 +23,13 @@ export async function addModuleHandler(req, res) {
     chartType,
   } = req.body
   let { userId } = res.locals
-  if (!name || !dataset || !chartType || !type)
+
   let missingParams = checkMissingParams(name, dataset, type, chartType)
-  if(missingParams){
+  if (missingParams) {
     return res.status(400).json({
       message: missingParams,
     })
-  }  
-
+  }
 
   if (!checkChartType(chartType))
     return res.status(400).json({ message: 'Invalid charttype' })
@@ -52,8 +51,9 @@ export async function addModuleHandler(req, res) {
 
   let { _id } = module
   let socketId = (await addSocketId(_id, userId))._id
-  await addSocketIdToModule(socketId, userId, _id)
-  return res.status(200).json(module)
+  let result = await addSocketIdToModule(socketId, userId, _id)
+
+  return res.status(200).json(result)
 }
 
 export async function deleteModuleHandler(req, res) {
