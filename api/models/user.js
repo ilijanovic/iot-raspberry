@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { mongo } from 'mongoose'
 import { conn } from '../config/connection'
 const userSchema = new mongoose.Schema({
   name: {
@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema({
       dataOptions: {
         required: true,
         type: Object,
+      },
+      socketId: {
+        type: mongoose.Types.ObjectId,
+        default: null,
       },
     },
   ],

@@ -8,7 +8,22 @@ import User from '../models/user'
  * @returns {Object} - Returns the saved module
  */
 
-export function addModule(_id, options) {}
+export function addModule(_id, { name, type, chartType, dataOptions }) {
+  return User.findOneAndUpdate(
+    { _id },
+    {
+      $push: {
+        modules: {
+          name,
+          type,
+          chartType,
+          dataOptions,
+        },
+      },
+    },
+    { new: true }
+  )
+}
 
 /**
  *
@@ -22,8 +37,17 @@ export async function getModules(_id) {
   return (await User.findOne({ _id }, { modules: 1 })).modules
 }
 
-export async function deleteModule(userId, moduleId) {
-  return await User.updateOne(
+/**
+ *
+ * Deletes an Module
+ *
+ * @param {Object} userId - ID of the user (MongoDB ID)
+ * @param {Object} moduleId - ID of the module (MongoDB ID)
+ * @returns {Promise} - Returns the new User object
+ */
+
+export function deleteModule(userId, moduleId) {
+  return User.findOneAndUpdate(
     { _id: userId },
     {
       $pull: {
@@ -31,6 +55,28 @@ export async function deleteModule(userId, moduleId) {
           _id: moduleId,
         },
       },
-    }
+    },
+    { new: true }
+  )
+}
+
+/**
+ *
+ * Adds an socketID to an Module
+ *
+ * @param {Object} socketId - Socket ID (mongoDB ID)
+ * @param {Object} userId - User ID (mongoDB ID)
+ * @param {Object} moduleId - Module ID (mongoDB ID)
+ */
+
+export function addSocketIdToModule(socketId, userId, moduleId) {
+  return User.findOneAndUpdate(
+    { _id: userId, 'modules._id': moduleId },
+    {
+      $set: {
+        'modules.$.socketId': socketId,
+      },
+    },
+    { new: true }
   )
 }

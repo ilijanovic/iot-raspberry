@@ -9,11 +9,6 @@ const socketSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     required: true,
   },
-  socketId: {
-    type: mongoose.Types.ObjectId,
-    required: true,
-    default: mongoose.Types.ObjectId,
-  },
 })
 
 export default conn.model('Socket', socketSchema)

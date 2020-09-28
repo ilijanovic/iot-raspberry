@@ -1,8 +1,9 @@
-import User from '../models/user'
 import { isValidObjectId } from '../validation/objectId'
-import { deleteModule } from '../helper/module'
+import { deleteModule, addModule, addSocketIdToModule } from '../helper/module'
 import { criticalError } from '../helper/errors'
 import { checkChartType, getDefaultOptions } from '../validation/chart'
+import { addSocketId } from '../helper/socket'
+import {checkMissingParams} from "../validation/requestParam"
 /**
  *
  * Adds new module to an user
@@ -23,9 +24,13 @@ export async function addModuleHandler(req, res) {
   } = req.body
   let { userId } = res.locals
   if (!name || !dataset || !chartType || !type)
+  let missingParams = checkMissingParams(name, dataset, type, chartType)
+  if(missingParams){
     return res.status(400).json({
-      message: `Required propertie missing: ${!name}, ${!dataset}, ${!type}, ${!chartType}`,
+      message: missingParams,
     })
+  }  
+
 
   if (!checkChartType(chartType))
     return res.status(400).json({ message: 'Invalid charttype' })
@@ -36,21 +41,18 @@ export async function addModuleHandler(req, res) {
     dataset,
   })
 
-  let { modules } = await User.findOneAndUpdate(
-    { _id: userId },
-    {
-      $push: {
-        modules: {
-          name,
-          type,
-          chartType,
-          dataOptions,
-        },
-      },
-    },
-    { new: true }
-  )
+  let { modules } = await addModule(userId, {
+    name,
+    type,
+    chartType,
+    dataOptions,
+  })
+
   let module = modules[modules.length - 1]
+
+  let { _id } = module
+  let socketId = (await addSocketId(_id, userId))._id
+  await addSocketIdToModule(socketId, userId, _id)
   return res.status(200).json(module)
 }
 
