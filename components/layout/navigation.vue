@@ -26,6 +26,7 @@ export default {
     async logout() {
       try {
         await this.$axios.$post('/api/logout')
+        this.$router.push('/')
       } catch (err) {
         console.log(err)
       }

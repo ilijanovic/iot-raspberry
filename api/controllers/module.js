@@ -17,8 +17,8 @@ export async function addModuleHandler(req, res) {
     name,
     dataset,
     type,
-    borderColor = null,
-    backgroundColor = null,
+    borderColor = '#bdc3c7',
+    backgroundColor = '#34495e',
     chartType,
   } = req.body
   let { userId } = res.locals

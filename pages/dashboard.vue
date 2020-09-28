@@ -4,9 +4,10 @@
     <div class="modules">
       <transition-group name="popup-list">
         <module
+          tag="div"
           v-for="mod in modules"
-          :module="mod"
           :key="mod._id.toString()"
+          :module="mod"
         />
       </transition-group>
     </div>
@@ -38,5 +39,8 @@ export default {
   margin: 20px auto;
   max-width: 900px;
   padding: 15px;
+}
+.popup-list-move {
+  transition: all 200ms;
 }
 </style>

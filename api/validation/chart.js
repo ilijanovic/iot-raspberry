@@ -14,7 +14,7 @@ export function checkChartType(type) {
 
 export function getDefaultOptions(
   chartType,
-  { dataset, borderColor = '#bdc3c7', backgroundColor = '#34495e' }
+  { dataset, borderColor, backgroundColor }
 ) {
   switch (chartType) {
     case 'line':
@@ -30,11 +30,16 @@ export function getDefaultOptions(
         ],
       }
     case 'pie':
+      let length = dataset.length
+      let arr = []
+      arr.length = length
+      arr.fill(1)
+      console.log(arr)
       return {
-        labels: [dataset],
+        labels: [...dataset],
         datasets: [
           {
-            data: [],
+            data: [...arr],
             backgroundColor,
           },
         ],

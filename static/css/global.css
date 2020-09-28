@@ -15,31 +15,31 @@
 
 .swap-leave-to
 
-/* .list-leave-active below version 2.1.8 */
-  {
+/* .list-leave-active below version 2.1.8 */ {
   opacity: 0;
   transform: translateX(30px);
 }
-
+.swap-move {
+  transition: transform 1000ms !important;
+}
 .swap-enter {
   opacity: 0;
   transform: translateX(-30px);
 }
-
 .popup-list-move {
-  transition: transform 200ms;
+  transition: transform 1000ms !important;
 }
 
 .popup-list-enter-active,
 .popup-list-leave-active {
   transition: all 500ms;
+  position: absolute;
 }
 
 .popup-list-enter,
 .popup-list-leave-to
 
-/* .list-leave-active below version 2.1.8 */
-  {
+/* .list-leave-active below version 2.1.8 */ {
   opacity: 0;
   transform: scale(0.7);
 }
@@ -52,8 +52,7 @@
 .fade-enter,
 .fade-leave-to
 
-/* .list-leave-active below version 2.1.8 */
-  {
+/* .list-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
 
@@ -65,8 +64,7 @@
 .popup-bounce-enter,
 .popup-bounce-leave-to
 
-/* .list-leave-active below version 2.1.8 */
-  {
+/* .list-leave-active below version 2.1.8 */ {
   opacity: 0;
   transform: scale(0.5);
 }

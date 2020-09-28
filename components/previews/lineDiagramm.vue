@@ -78,10 +78,12 @@ export default {
       this.chart.update()
     },
     setBorder(color) {
+      this.borderColor = color
       this.chart.data.datasets[0].borderColor = color
       this.updateChart()
     },
     setBackground(color) {
+      this.backgroundColor = color
       this.chart.data.datasets[0].backgroundColor = color
       this.updateChart()
     },

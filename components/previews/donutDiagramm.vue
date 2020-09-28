@@ -2,6 +2,10 @@
   <div class="line">
     <canvas ref="canvas"></canvas>
     <div class="chartOptions">
+      <div style="width: 100%; margin: 10px 0" class="inputbox">
+        <small>Modul Name</small>
+        <input v-model="name" />
+      </div>
       <div style="display: flex; justify-content: space-between; width: 100%">
         <primary
           :class="{ disabled: dataSets.length === maxSets }"
@@ -10,8 +14,9 @@
         >
         <small>{{ dataSets.length }} / {{ maxSets }}</small>
       </div>
+
       <div style="width: 100%">
-        <transition-group name="popup-list" tag="div">
+        <transition-group name="swap" tag="div">
           <div v-for="(set, i) in dataSets" :key="set.id" class="inputsection">
             <div class="inputbox">
               <small>Beschreibung</small>
@@ -42,7 +47,7 @@
       "
     >
       <primary
-        :class="{ disabled: saving }"
+        :loading="saving"
         @click.native="save"
         style="margin-left: auto"
         v-if="dataSets.length > 0"
@@ -69,6 +74,7 @@ export default {
     dataSets: [],
     maxSets: 5,
     saving: false,
+    backgroundColor: '#34495e',
     componentName: 'lineModule',
   }),
   mounted() {
@@ -110,12 +116,10 @@ export default {
         this.saving = true
         let data = await this.$axios.$post('/api/addModule', {
           name: this.name,
-          dataset: this.datasets,
-          borderColor: this.borderColor,
-          backgroundColor: this.datasets.map(
-            ({ backgroundColor }) => backgroundColor
-          ),
+          dataset: this.dataSets.map(({ description }) => description),
+          backgroundColor: this.chart.data.datasets[0].backgroundColor,
           type: 'donutChart',
+          chartType: 'pie',
         })
         this.$store.commit('ADD_MODULE', data)
         this.$store.commit('modals/SET_MODULE_OPTIONS', false)
