@@ -2,15 +2,13 @@ import express from 'express'
 import postRoutes from './routes/post'
 import getRoutes from './routes/get'
 import cookieParser from 'cookie-parser'
-import socketio from 'socket.io'
+import _http from 'http'
 import moduleRoutes from './routes/module/post'
-import http from 'http'
+import _io from 'socket.io'
 
 let app = express()
-
-let server = http.createServer(app)
-
-let _io = socketio(server)
+const http = _http.createServer(app)
+const io = _io(http)
 
 /**
  * Parses the incoming request Body. Needed for POST requests
@@ -23,4 +21,4 @@ app.use('/module', moduleRoutes)
 
 export const handler = app
 export const path = '/api/'
-export const io = _io
+export const IO = io

@@ -37,6 +37,7 @@ import trash from '@/components/buttons/trash'
 import lineChart from '@/components/module/infobox/line'
 import donutChart from '@/components/module/infobox/donut'
 import { minimizeOptions, defaultOptions } from '@/static/js/chartoptions'
+import socket from '@/plugins/socket'
 export default {
   props: ['module'],
   components: {
@@ -78,11 +79,17 @@ export default {
   mounted() {
     this.$nextTick(() => {
       let ctx = this.$refs.canvas.getContext('2d')
-      let { chartType, dataOptions } = Object.freeze(this.module)
+      let { chartType, dataOptions, _id } = Object.freeze(this.module)
       this.chart = new Chart(ctx, {
         type: chartType,
         data: dataOptions,
         options: minimizeOptions,
+      })
+      socket.on('connect', () => {
+        console.log('he')
+      })
+      socket.on('test', () => {
+        console.log('nice')
       })
     })
   },
