@@ -5,6 +5,10 @@ const socketSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     required: true,
   },
+  moduleId: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+  },
   socketId: {
     type: mongoose.Types.ObjectId,
     required: true,

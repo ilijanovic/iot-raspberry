@@ -15,8 +15,8 @@
         <small>{{ dataSets.length }} / {{ maxSets }}</small>
       </div>
 
-      <div style="width: 100%">
-        <transition-group name="swap" tag="div">
+      <div style="position: relative; width: 100%">
+        <transition-group name="fade" tag="div">
           <div v-for="(set, i) in dataSets" :key="set.id" class="inputsection">
             <div class="inputbox">
               <small>Beschreibung</small>
@@ -173,6 +173,7 @@ export default {
     width: 100%;
     justify-content: space-evenly;
     align-items: center;
+    left: 0;
     div {
       flex: 1;
       margin: 0 5px;

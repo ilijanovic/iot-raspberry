@@ -1,15 +1,17 @@
 <template>
   <div class="container">
     <navigation />
-    <div class="modules">
-      <transition-group name="popup-list">
-        <module
-          tag="div"
-          v-for="mod in modules"
-          :key="mod._id.toString()"
-          :module="mod"
-        />
-      </transition-group>
+    <div style="padding: 15px">
+      <div class="modules">
+        <transition-group name="popup-list">
+          <module
+            tag="div"
+            v-for="mod in modules"
+            :key="mod._id.toString()"
+            :module="mod"
+          />
+        </transition-group>
+      </div>
     </div>
   </div>
 </template>
@@ -38,7 +40,7 @@ export default {
   width: 100%;
   margin: 20px auto;
   max-width: 900px;
-  padding: 15px;
+  position: relative;
 }
 .popup-list-move {
   transition: all 200ms;

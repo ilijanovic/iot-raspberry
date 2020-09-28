@@ -93,7 +93,7 @@ export default {
   box-shadow: var(--shadow);
   border-radius: 6px;
   margin-bottom: 20px;
-
+  background: var(--background-light);
   .head {
     background: var(--light-blue);
     border-radius: 6px 6px 0 0;

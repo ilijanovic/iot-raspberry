@@ -41,11 +41,11 @@ export default {
 
 <style lang="scss" scoped>
 .overlay {
+  z-index: 10;
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.3);
   position: fixed;
-  backdrop-filter: blur(2px);
   display: flex;
   .yes {
     color: var(--red);
