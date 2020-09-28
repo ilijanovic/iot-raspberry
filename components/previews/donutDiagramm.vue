@@ -69,8 +69,6 @@ export default {
     dataSets: [],
     maxSets: 5,
     saving: false,
-    borderColor: '#bdc3c7',
-    backgroundColor: '#34495e',
     componentName: 'lineModule',
   }),
   mounted() {
@@ -107,17 +105,24 @@ export default {
       this.chart.data.labels.push('data...')
       this.updateChart()
     },
-    save() {
-      this.saving = true
-      this.$store.commit('ADD_MODULE', {
-        name: this.name,
-        dataset: this.dataset,
-        borderColor: this.borderColor,
-        backgroundColor: this.backgroundColor,
-        type: 'donutChart',
-      })
-      this.$store.commit('modals/SET_MODULE_OPTIONS', false)
+    async save() {
+      try {
+        this.saving = true
+        let data = await this.$axios.$post('/api/addModule', {
+          name: this.name,
+          dataset: this.datasets,
+          borderColor: this.borderColor,
+          backgroundColor: this.datasets.map(
+            ({ backgroundColor }) => backgroundColor
+          ),
+          type: 'donutChart',
+        })
+        this.$store.commit('ADD_MODULE', data)
+        this.$store.commit('modals/SET_MODULE_OPTIONS', false)
+      } catch (err) {}
+      this.saving = false
     },
+
     updateChart() {
       this.chart.update()
     },
@@ -145,10 +150,9 @@ export default {
       })
     })
   },
-  destroyed(){
-    
-    this.chart.destroy();
-  }
+  destroyed() {
+    this.chart.destroy()
+  },
 }
 </script>
 

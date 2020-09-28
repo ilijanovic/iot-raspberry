@@ -28,10 +28,7 @@
         text-align: right;
       "
     >
-      <add
-        :class="{ disabled: saving }"
-        @click.native="save"
-        style="margin-left: auto"
+      <add :loading="saving" @click.native="save" style="margin-left: auto"
         >Speichern</add
       >
     </div>
@@ -57,17 +54,21 @@ export default {
     backgroundColor: '#34495e',
   }),
   methods: {
-    save() {
+    async save() {
       this.saving = true
-      this.$store.commit('ADD_MODULE', {
+      let data = await this.$axios.$post('/api/addModule', {
         name: this.name,
-        datasets: this.dataset,
+        dataset: this.dataset,
         borderColor: this.borderColor,
         backgroundColor: this.backgroundColor,
         type: 'lineChart',
         chartType: 'line',
       })
-      this.$store.commit('modals/SET_MODULE_OPTIONS', false)
+      try {
+        this.$store.commit('ADD_MODULE', data)
+        this.$store.commit('modals/SET_MODULE_OPTIONS', false)
+      } catch (err) {}
+      this.saving = false
     },
     changeDataset() {
       this.chart.data.datasets[0].label = this.dataset

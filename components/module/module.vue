@@ -75,28 +75,10 @@ export default {
   mounted() {
     this.$nextTick(() => {
       let ctx = this.$refs.canvas.getContext('2d')
-      let { chartType, datasets, borderColor, backgroundColor } = this.module
+      let { chartType, dataOptions } = Object.freeze(this.module)
       this.chart = new Chart(ctx, {
         type: chartType,
-        data: {
-          labels: [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-          ],
-          datasets: [
-            {
-              label: datasets,
-              backgroundColor,
-              borderColor,
-              data: [0, 10, 5, 2, 20, 30, 45],
-            },
-          ],
-        },
+        data: dataOptions,
         options: minimizeOptions,
       })
     })

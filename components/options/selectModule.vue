@@ -46,11 +46,11 @@ export default {
   background: var(--background-light);
   border-radius: 10px;
   max-width: 600px;
-  max-height: 95vh;
+  max-height: 90vh;
   width: 95%;
   left: 50%;
   top: 50%;
-  min-height: 500px;
+  height: 800px;
   box-shadow: var(--shadow);
   padding: 10px;
   border: 1px solid var(--border-color);

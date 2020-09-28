@@ -1,8 +1,8 @@
 <template>
   <div>
     <transition name="fade">
-      <warning :id="id" :message="warningMessage" v-if="warning"
-    /></transition>
+      <warning :id="id" :message="warningMessage" v-if="warningState" />
+    </transition>
     <transition name="popup">
       <selectModule v-if="state" />
     </transition>
@@ -17,7 +17,7 @@ export default {
   computed: {
     ...mapGetters({
       state: 'modals/moduleState',
-      warning: 'modals/warning',
+      warningState: 'modals/warning',
       id: 'modals/moduleID',
       warningMessage: 'modals/warningMessage',
     }),
