@@ -2,17 +2,15 @@ import express from 'express'
 import postRoutes from './routes/post'
 import getRoutes from './routes/get'
 import cookieParser from 'cookie-parser'
-import redis from 'redis'
-
-// let client = redis.createClient({
-//   host: process.env.REDIS_HOST || '127.0.0.1',
-//   port: process.env.REDIS_PORT || 6379,
-// })
-// client.on('error', (err) => {
-//   console.log(err)
-// })
+import socketio from 'socket.io'
+import moduleRoutes from './routes/module/post'
+import http from 'http'
 
 let app = express()
+
+let server = http.createServer(app)
+
+let _io = socketio(server)
 
 /**
  * Parses the incoming request Body. Needed for POST requests
@@ -21,9 +19,8 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(postRoutes)
 app.use(getRoutes)
+app.use('/module', moduleRoutes)
 
-//export const redisClient = client
-export default {
-  handler: app,
-  path: '/api/',
-}
+export const handler = app
+export const path = '/api/'
+export const io = _io

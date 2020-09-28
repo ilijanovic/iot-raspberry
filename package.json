@@ -21,6 +21,8 @@
     "mongoose": "^5.10.6",
     "nuxt": "^2.14.0",
     "redis": "^3.0.2",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
     "vue-chartjs": "^3.5.1",
     "vue-feather-icons": "^5.1.0",
     "vue-loading-spinner": "^1.0.11"
