@@ -71,7 +71,7 @@ html {
 }
 
 small {
-  color: grey;
+  color: #585858;
   font-size: 15px;
   padding: 5px 0;
   display: block;
