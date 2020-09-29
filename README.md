@@ -45,3 +45,24 @@ Under `/api/config/config.js` you are able to set some general configurations li
 
 Note here: cookie expiration time == token expiration time
 The cookie deletes itself after that given amount of time
+
+## Update chart
+
+To update an chart send an JSON `POST` request to `/api/module/setData`
+
+    {
+        id: <socketID>
+        chart: <chart type>
+        data: <depending on what chart you use you will need different properties>
+    }
+
+Example with line chart:
+
+    {
+        id: "5f7341d87d6c1710e5a04d99",
+        chart: "line",
+        data: {
+            label: "test",
+            dataPoint: 23
+        }
+    }
