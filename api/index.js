@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser'
 import _http from 'http'
 import moduleRoutes from './routes/module/post'
 import ioMethod from 'socket.io'
+import cors from 'cors'
 
 let app = express()
 const _io = ioMethod(4000)
@@ -15,7 +16,7 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(postRoutes)
 app.use(getRoutes)
-app.use('/module', moduleRoutes)
+app.use('/module', cors(), moduleRoutes)
 
 export const handler = app
 export const path = '/api/'

@@ -2,7 +2,7 @@ import { isValidObjectId } from '../validation/objectId'
 import { deleteModule, addModule, addSocketIdToModule } from '../helper/module'
 import { criticalError } from '../helper/errors'
 import { checkChartType, getDefaultOptions } from '../validation/chart'
-import { addSocketId } from '../helper/socket'
+import { addSocketId, deleteSocketId } from '../helper/socket'
 import { checkMissingParams } from '../validation/requestParam'
 /**
  *
@@ -65,6 +65,7 @@ export async function deleteModuleHandler(req, res) {
 
   try {
     await deleteModule(userId, moduleId)
+    await deleteSocketId(moduleId)
     return res.status(200).json({ message: 'Module successfully deleted' })
   } catch (err) {
     return criticalError(res)

@@ -24,3 +24,7 @@ export function getSocketConfig(_id) {
 export function emitChartData(id, data) {
   io.emit(id, data)
 }
+
+export function deleteSocketId(moduleId) {
+  return Socket.deleteOne({ moduleId })
+}
