@@ -51,6 +51,7 @@
         @click.native="save"
         style="margin-left: auto"
         v-if="dataSets.length > 0"
+        :disabled="disabled"
         >Speichern</primary
       >
     </div>
@@ -67,6 +68,11 @@ export default {
     chartColor,
     primary,
     trash,
+  },
+  computed: {
+    disabled() {
+      return !this.name || !this.dataSets.length
+    },
   },
   data: () => ({
     chart: null,

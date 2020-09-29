@@ -41,7 +41,7 @@ export default {
 
 <style lang="scss" scoped>
 .overlay {
-  z-index: 10;
+  z-index: 14;
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.3);

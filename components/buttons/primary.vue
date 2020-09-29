@@ -1,5 +1,5 @@
 <template>
-  <button :class="{ disabled: loading }">
+  <button :class="{ disabled: loading || disabled }">
     <slot></slot>
     <ringLoader style="margin-left: 8px" v-if="loading" />
   </button>
@@ -9,6 +9,10 @@ import ringLoader from '@/components/loading/smallRing'
 export default {
   props: {
     loading: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
       type: Boolean,
       default: false,
     },

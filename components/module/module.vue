@@ -6,10 +6,14 @@
     </div>
     <div class="content">
       <div class="chart">
-        <p>
-          <b>Socket ID:</b> <small>{{ module.socketId }}</small>
-        </p>
-        <component :is="module.type" />
+        <div style="width: 100%">
+          <p>
+            <b>Socket ID:</b> <small>{{ module.socketId }}</small>
+          </p>
+          <div class="line"></div>
+          <component :is="module.type" />
+        </div>
+
         <div style="flex: 1" :class="{ canvas: open }">
           <canvas style="margin-left: auto" ref="canvas"></canvas>
         </div>
@@ -115,6 +119,11 @@ export default {
   border-radius: 6px;
   margin-bottom: 20px;
   background: var(--background-light);
+  .line {
+    border-top: 1px solid #dadada;
+    width: 100%;
+    margin: 10px 0;
+  }
   .head {
     background: var(--light-blue);
     border-radius: 6px 6px 0 0;

@@ -30,6 +30,10 @@ export default {
         rel: 'stylesheet',
         href: '/css/global.css',
       },
+      {
+        rel: 'stylesheet',
+        href: '/css/prism.css',
+      },
     ],
   },
 

@@ -28,7 +28,11 @@
         text-align: right;
       "
     >
-      <add :loading="saving" @click.native="save" style="margin-left: auto"
+      <add
+        :disabled="disabled"
+        :loading="saving"
+        @click.native="save"
+        style="margin-left: auto"
         >Speichern</add
       >
     </div>
@@ -45,6 +49,11 @@ export default {
     chartColor,
     add,
   },
+  computed: {
+    disabled() {
+      return !this.name
+    },
+  },
   data: () => ({
     chart: null,
     name: '',
@@ -53,6 +62,7 @@ export default {
     borderColor: '#bdc3c7',
     backgroundColor: '#34495e',
   }),
+
   methods: {
     async save() {
       this.saving = true
