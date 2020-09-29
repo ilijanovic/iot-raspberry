@@ -1,5 +1,5 @@
 import Socket from '../models/socket'
-import { IO } from '../index'
+import { io } from '../index'
 /**
  *
  * Saves an document to the "Socket" collection
@@ -22,6 +22,5 @@ export function getSocketConfig(_id) {
 }
 
 export function emitChartData(id, data) {
-  console.log('emitted: ', data)
-  IO.emit('test', data)
+  io.emit(id, data)
 }

@@ -34,7 +34,6 @@ export function getDefaultOptions(
       let arr = []
       arr.length = length
       arr.fill(1)
-      console.log(arr)
       return {
         labels: [...dataset],
         datasets: [

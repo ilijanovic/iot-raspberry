@@ -51,6 +51,7 @@ export default {
   data: () => ({
     open: true,
     average: 12.2,
+    chart: null,
   }),
   methods: {
     toggleChart() {
@@ -75,21 +76,31 @@ export default {
         id,
       })
     },
+
+    addDatapoint({ label, dataPoint }) {
+      this.chart.data.labels.push(label)
+      this.chart.data.datasets[0].data.push(dataPoint)
+
+      if (this.chart.data.labels.length >= 10) {
+        this.chart.data.labels.shift()
+        this.chart.data.datasets[0].data.shift()
+      }
+      this.chart.update()
+    },
   },
   mounted() {
     this.$nextTick(() => {
       let ctx = this.$refs.canvas.getContext('2d')
-      let { chartType, dataOptions, _id } = Object.freeze(this.module)
+      let { chartType, dataOptions, socketId } = Object.freeze(this.module)
+
       this.chart = new Chart(ctx, {
         type: chartType,
         data: dataOptions,
         options: minimizeOptions,
       })
-      socket.on('connect', () => {
-        console.log('he')
-      })
-      socket.on('test', () => {
-        console.log('nice')
+
+      socket.on(socketId, (data) => {
+        this.addDatapoint(data)
       })
     })
   },

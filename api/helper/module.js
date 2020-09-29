@@ -34,7 +34,17 @@ export function addModule(_id, { name, type, chartType, dataOptions }) {
  */
 
 export async function getModules(_id) {
-  return (await User.findOne({ _id }, { modules: 1 })).modules
+  let modules = (await User.findOne({ _id }, { modules: 1 }).lean()).modules
+  modules.forEach((module) => {
+    if (module.chartType == 'line') {
+      module.dataOptions.labels = module.dataOptions.labels.slice(-10)
+      module.dataOptions.datasets[0].data = module.dataOptions.datasets[0].data.slice(
+        -10
+      )
+    }
+  })
+
+  return modules
 }
 
 /**
