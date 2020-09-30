@@ -1,7 +1,7 @@
 <template>
   <div class="info">
     <div class="infobox">
-      <p>POST request boilerplate</p>
+      <p>JSON POST request boilerplate to <b>/api/module/setData</b></p>
       <primary @click.native="open = !open">Anzeigen</primary>
     </div>
     <br />
@@ -15,11 +15,12 @@
 <script>
 import primary from '@/components/buttons/primary'
 export default {
+  props: ['id'],
   data() {
     return {
       open: false,
       code: {
-        id: '5f73469af5443d7a0c266330',
+        id: this.id,
         chart: 'line',
         data: { label: 'test', dataPoint: 13 },
       },

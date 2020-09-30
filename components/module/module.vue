@@ -11,7 +11,7 @@
             <b>Socket ID:</b> <small>{{ module.socketId }}</small>
           </p>
           <div class="line"></div>
-          <component :is="module.type" />
+          <component :id="module.socketId" :is="module.type" />
         </div>
 
         <div style="flex: 1" :class="{ canvas: open }">
@@ -81,14 +81,19 @@ export default {
       })
     },
 
-    addDatapoint({ label, dataPoint }) {
-      this.chart.data.labels.push(label)
-      this.chart.data.datasets[0].data.push(dataPoint)
-
-      if (this.chart.data.labels.length >= 10) {
-        this.chart.data.labels.shift()
-        this.chart.data.datasets[0].data.shift()
+    addDatapoint({ label, type, dataPoint, index }) {
+      if (type === 'line') {
+        this.chart.data.labels.push(label)
+        this.chart.data.datasets[0].data.push(dataPoint)
+        if (this.chart.data.labels.length >= 10) {
+          this.chart.data.labels.shift()
+          this.chart.data.datasets[0].data.shift()
+        }
       }
+      if (type === 'pie') {
+        this.chart.data.datasets[0].data[index] = dataPoint
+      }
+
       this.chart.update()
     },
   },

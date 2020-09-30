@@ -66,3 +66,14 @@ Example with line chart:
             dataPoint: 23
         }
     }
+
+Example with pie chart:
+
+    {
+        id: "5f7341d87d6c1710e5a04d99",
+        chart: "pie",
+        data: {
+            dataPoint: 23,
+            index: 0
+        }
+    }

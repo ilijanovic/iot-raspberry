@@ -12,7 +12,7 @@ export async function setDataHandler(req, res) {
   }
   try {
     await setData(id, chart, data)
-    emitChartData(id, data)
+    emitChartData(id, chart, data)
     return res.status(200).json({ message: 'Added new datapoint' })
   } catch (err) {
     return criticalError(res)

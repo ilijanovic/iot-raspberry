@@ -21,7 +21,8 @@ export function getSocketConfig(_id) {
   return Socket.findOne({ _id })
 }
 
-export function emitChartData(id, data) {
+export function emitChartData(id, type, data) {
+  data['type'] = type
   io.emit(id, data)
 }
 
