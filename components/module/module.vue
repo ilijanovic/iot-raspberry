@@ -107,7 +107,6 @@ export default {
         data: dataOptions,
         options: minimizeOptions,
       })
-
       socket.on(socketId, (data) => {
         this.addDatapoint(data)
       })
