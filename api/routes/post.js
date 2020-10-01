@@ -21,7 +21,7 @@ router.post('/login', loginHandler)
  * @desc    Logs the user out
  */
 
-router.post('/logout', auth, logoutHandler)
+router.post('/logout', logoutHandler)
 
 /**
  * @route   /api/register

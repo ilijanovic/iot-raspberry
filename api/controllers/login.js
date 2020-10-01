@@ -1,3 +1,5 @@
+import { writeErrorLog } from '../helper/errors'
+
 /**
  *  This is the controller for loging in
  *  Expects "name" and "password" inside the request body
@@ -15,20 +17,21 @@ export async function loginHandler(req, res) {
   let { name, password } = req.body
 
   if (typeof name !== 'string') return userExistNot(res)
-
-  let user = await getUserByNameSensitive(name.trim())
-
-  if (!user) return userExistNot(res)
-
-  let passwordEqual = await bcrypt.compare(password, user.hashedPassword)
-
-  if (!passwordEqual) return passwordWrong(res)
   try {
+    let user = await getUserByNameSensitive(name.trim())
+
+    if (!user) return userExistNot(res)
+
+    let passwordEqual = await bcrypt.compare(password, user.hashedPassword)
+
+    if (!passwordEqual) return passwordWrong(res)
+
     let token = await generateToken(user)
     user = removeSensitiveData(user)
     setCookie(res, token)
     return res.status(200).json({ user, token })
   } catch (err) {
+    await writeErrorLog(err, 'loginHandler')
     return criticalError(res)
   }
 }

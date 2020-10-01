@@ -1,36 +1,27 @@
 <template>
   <div class="add">
     <h2>IoT</h2>
-    <p style="margin: auto" v-if="user">Benutzer: {{ user }}</p>
     <primary
       class="addbutton"
       @click.native="$store.commit('modals/SET_MODULE_OPTIONS', true)"
       >Hinzufügen</primary
     >
-    <primary @click.native="logout">Logout</primary>
+    <linkDropdown :user="user" />
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
 import primary from '@/components/buttons/primary'
+import linkDropdown from '@/components/dropdowns/links'
 export default {
   components: {
     primary,
+    linkDropdown,
   },
   computed: {
     ...mapGetters({
       user: 'user',
     }),
-  },
-  methods: {
-    async logout() {
-      try {
-        await this.$axios.$post('/api/logout')
-        this.$router.push('/')
-      } catch (err) {
-        console.log(err)
-      }
-    },
   },
 }
 </script>

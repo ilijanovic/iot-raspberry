@@ -17,14 +17,36 @@ export async function addSocketId(moduleId, userId) {
   return await socketModel.save()
 }
 
+/**
+ *
+ * Returns socket config
+ *
+ * @param {Object | String} _id - Socket ID
+ * @returns {Object} - Object that contains user ID and Module ID
+ */
+
 export function getSocketConfig(_id) {
   return Socket.findOne({ _id })
 }
+
+/**
+ *
+ * @param {String} id - Socket ID
+ * @param {String} type - Type of the chart
+ * @param {Object} data - Contains data that is being emited
+ */
 
 export function emitChartData(id, type, data) {
   data['type'] = type
   io.emit(id, data)
 }
+
+/**
+ *
+ * Deletes Socket ID
+ *
+ * @param {String | Object} moduleId - Module ID
+ */
 
 export function deleteSocketId(moduleId) {
   return Socket.deleteOne({ moduleId })

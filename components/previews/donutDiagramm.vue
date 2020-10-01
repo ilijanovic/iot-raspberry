@@ -63,6 +63,7 @@ import Chart from 'chart.js'
 import chartColor from '@/components/dropdowns/line/chartColors'
 import primary from '@/components/buttons/primary'
 import trash from '@/components/buttons/trash'
+import { config } from '@/api/config/config'
 export default {
   components: {
     chartColor,
@@ -78,7 +79,7 @@ export default {
     chart: null,
     name: '',
     dataSets: [],
-    maxSets: 5,
+    maxSets: config.pieOptionsAmount,
     saving: false,
     backgroundColor: '#34495e',
     componentName: 'lineModule',
@@ -92,6 +93,7 @@ export default {
     setDesc(e, i) {
       let val = e.target.value
       this.chart.data.labels[i] = val
+      this.dataSets[i].description = val
       this.updateChart()
     },
     setColor(color, index) {
@@ -106,7 +108,6 @@ export default {
     },
     addSet() {
       if (this.dataSets.length >= this.maxSets) return
-
       this.dataSets.push({
         id: Math.random(),
         color: this.backgroundColor,

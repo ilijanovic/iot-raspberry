@@ -58,6 +58,7 @@ export default {
         this.$store.commit('SET_LOGIN', true)
         this.$store.commit('SET_USER', name)
         this.$store.commit('SET_MODULES', modules)
+        this.$store.commit('SET_TOKEN', token)
       } catch ({ response: { data } }) {
         this.errorMessage = data.message
         this.logging = false

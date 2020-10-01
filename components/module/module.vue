@@ -20,9 +20,7 @@
       </div>
       <div class="buttonbox">
         <trash @click.native="deleteModule(module._id)" />
-        <primary style="margin-left: auto; margin-right: 10px" class="btn"
-          >Bearbeiten<Edit3Icon style="margin-left: 10px" size="1.3x"
-        /></primary>
+
         <primary @click.native="toggleChart" class="btn"
           >Ansehen<ChevronsDownIcon
             style="margin-left: 10px"

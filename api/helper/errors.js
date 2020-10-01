@@ -1,3 +1,5 @@
+import fs from 'fs'
+
 /**
  * Response with an 400 error and the message that the user does not exist.
  *
@@ -56,5 +58,21 @@ export function criticalError(res) {
 export function notAutorized(res) {
   return res.status(402).json({
     message: 'Zugriff verweigert. Bitte melden Sie sich neu an',
+  })
+}
+
+export function writeErrorLog(err, routeHandler) {
+  let path = './error.log'
+  let date = new Date()
+  return new Promise((res) => {
+    if (fs.existsSync(path)) {
+      fs.appendFile(
+        path,
+        `\n ${err} | Time: ${date.toISOString()} | Appeard in:  ${routeHandler} \n`,
+        res
+      )
+    } else {
+      fs.writeFile(path, err, res)
+    }
   })
 }

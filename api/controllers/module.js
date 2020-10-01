@@ -1,6 +1,6 @@
 import { isValidObjectId } from '../validation/objectId'
 import { deleteModule, addModule, addSocketIdToModule } from '../helper/module'
-import { criticalError } from '../helper/errors'
+import { criticalError, writeErrorLog } from '../helper/errors'
 import { checkChartType, getDefaultOptions } from '../validation/chart'
 import { addSocketId, deleteSocketId } from '../helper/socket'
 import { checkMissingParams } from '../validation/requestParam'
@@ -24,38 +24,50 @@ export async function addModuleHandler(req, res) {
   } = req.body
   let { userId } = res.locals
 
-  let missingParams = checkMissingParams(name, dataset, type, chartType)
-  if (missingParams) {
-    return res.status(400).json({
-      message: missingParams,
+  try {
+    let missingParams = checkMissingParams(name, dataset, type, chartType)
+    if (missingParams) {
+      return res.status(400).json({
+        message: missingParams,
+      })
+    }
+
+    if (!checkChartType(chartType))
+      return res.status(400).json({ message: 'Invalid charttype' })
+
+    let dataOptions = getDefaultOptions(chartType, {
+      borderColor,
+      backgroundColor,
+      dataset,
     })
+
+    let { modules } = await addModule(userId, {
+      name,
+      type,
+      chartType,
+      dataOptions,
+    })
+
+    let module = modules[modules.length - 1]
+
+    let { _id } = module
+    let socketId = (await addSocketId(_id, userId))._id
+    let result = await addSocketIdToModule(socketId, userId, _id)
+
+    return res.status(200).json(result)
+  } catch (err) {
+    await writeErrorLog(err, 'addModuleHandler')
+    return criticalError(res)
   }
-
-  if (!checkChartType(chartType))
-    return res.status(400).json({ message: 'Invalid charttype' })
-
-  let dataOptions = getDefaultOptions(chartType, {
-    borderColor,
-    backgroundColor,
-    dataset,
-  })
-
-  let { modules } = await addModule(userId, {
-    name,
-    type,
-    chartType,
-    dataOptions,
-  })
-
-  let module = modules[modules.length - 1]
-
-  let { _id } = module
-  let socketId = (await addSocketId(_id, userId))._id
-  let result = await addSocketIdToModule(socketId, userId, _id)
-
-  return res.status(200).json(result)
 }
 
+/**
+ *
+ * Deletes an Module and its Socket ID
+ *
+ * @param {Object} req - Request Object
+ * @param {Object} res -  Response Object
+ */
 export async function deleteModuleHandler(req, res) {
   let { userId } = res.locals
   let { moduleId } = req.body
@@ -68,6 +80,7 @@ export async function deleteModuleHandler(req, res) {
     await deleteSocketId(moduleId)
     return res.status(200).json({ message: 'Module successfully deleted' })
   } catch (err) {
+    await writeErrorLog(err, 'deleteModuleHandler')
     return criticalError(res)
   }
 }

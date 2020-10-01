@@ -1,3 +1,5 @@
+import { config } from '../config/config'
+
 const types = ['line', 'pie']
 
 /**
@@ -11,6 +13,15 @@ const types = ['line', 'pie']
 export function checkChartType(type) {
   return types.some((chartType) => chartType === type)
 }
+
+/**
+ *
+ * Returns the default data for the chart
+ *
+ * @param {String} chartType - Type of the chart
+ * @param {Object} data - Object that contains data like background color, border color etc.
+ * @returns {Object} - Returns the starting data
+ */
 
 export function getDefaultOptions(
   chartType,
@@ -32,6 +43,9 @@ export function getDefaultOptions(
     case 'pie':
       let length = dataset.length
       let arr = []
+      if (length > config.pieOptionsAmount) {
+        length = config.pieOptionsAmount
+      }
       arr.length = length
       arr.fill(1)
       return {
