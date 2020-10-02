@@ -87,7 +87,7 @@ export const actions = {
    *
    */
 
-  async nuxtServerInit({ commit }, { req }) {
+  async nuxtServerInit({ commit }, { req, route, redirect }) {
     let { getTokenFromCookie } = await import('../api/helper/cookie')
     let { verifyToken, decode } = await import('../api/helper/token')
     let { getModules } = await import('../api/helper/module')
@@ -100,6 +100,7 @@ export const actions = {
       commit('SET_LOGIN', true)
       commit('SET_MODULES', modules)
       commit('SET_TOKEN', token)
+      if (route.path == '/') redirect('/dashboard')
     }
   },
 

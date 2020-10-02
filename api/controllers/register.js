@@ -1,7 +1,11 @@
 import { nameValidation } from '../validation/nameValidation'
 import { passwordValidation } from '../validation/passwordValidation'
 import { getUserByNameSensitive } from '../helper/user'
-import { userAlreadyExist, writeErrorLog } from '../helper/errors'
+import {
+  criticalError,
+  userAlreadyExist,
+  writeErrorLog,
+} from '../helper/errors'
 import User from '../models/user'
 
 /**
@@ -33,6 +37,6 @@ export async function registerHandler(req, res) {
     res.status(200).json({ name, hashedPassword })
   } catch (err) {
     await writeErrorLog(err, 'registerHandler')
-    res.status(400).json({ message: err })
+    return criticalError(res)
   }
 }

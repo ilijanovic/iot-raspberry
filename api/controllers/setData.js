@@ -24,6 +24,7 @@ export async function setDataHandler(req, res) {
     emitChartData(id, chart, data)
     return res.status(200).json({ message: 'Added new datapoint' })
   } catch (err) {
-    return res.status(400).json({ message: err })
+    await writeErrorLog(err, 'setDataHandler')
+    return criticalError(res)
   }
 }
